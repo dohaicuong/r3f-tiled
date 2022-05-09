@@ -1,6 +1,5 @@
 import { useTexture } from '@react-three/drei'
 import { useEffect, useMemo } from 'react'
-import { NearestFilter } from 'three'
 
 type TileProps = {
   position: [number, number]

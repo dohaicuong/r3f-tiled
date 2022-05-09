@@ -21,17 +21,17 @@ const App = () => {
 export default App
 
 const Player = () => {
-  const texture = useTexture(`assets/elf_idle.png`)
+  const texture = useTexture(`assets/sorc.png`)
   const map = useMemo(() => texture.clone(), [])
 
   useEffect(() => {
-    const frameWidth = 16
-    const frameHeight = 24
+    const frameWidth = 48
+    const frameHeight = 48
     const xFrame = 0
-    const yFrame = 3
+    const yFrame = 11
 
     // map.magFilter = NearestFilter
-    map.minFilter = LinearMipMapLinearFilter
+    // map.minFilter = LinearMipMapLinearFilter
 
     map.repeat.x = 1 / (map.image.width / frameWidth)
     map.repeat.y = 1 / (map.image.height / frameHeight)
@@ -46,19 +46,22 @@ const Player = () => {
     if (interval.current === undefined) interval.current = clock.oldTime
     
     const frameRate = 250
-    const frameWidth = 16
+    const frameWidth = 48
     if (clock.oldTime >= interval.current + frameRate) {
       interval.current = clock.oldTime
-      currentFrame.current++
 
-      map.offset.x = (currentFrame.current % 4) * frameWidth / map.image.width
+      currentFrame.current = currentFrame.current === 3
+        ? 0
+        : currentFrame.current + 1
+
+      map.offset.x = currentFrame.current * frameWidth / map.image.width
     }
   })
 
   return (
     <sprite position={[2, 1, 0] as any} scale={1}>
       <spriteMaterial map={map} />
-      <boxGeometry args={[1, 1.5, 1]} />
+      <boxGeometry args={[2, 2, 1]} />
     </sprite>
   )
 }
