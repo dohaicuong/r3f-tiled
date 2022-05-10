@@ -1,5 +1,5 @@
 import { SpriteProps } from "@react-three/fiber"
-import { AnimatedSprite } from "./components/AnimatedSprite"
+import { AnimatedSprite } from "../common/AnimatedSprite"
 
 type Action =
   | 'atk_up'

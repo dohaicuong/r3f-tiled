@@ -1,21 +1,26 @@
 import { Html } from "@react-three/drei"
 import { useEffect, useState } from "react"
 import useSound from "use-sound"
-import backgroundSound from '../assets/a_rainy_forest_morning.mp3'
+import { useAudio } from 'react-use'
+import backgroundSound from '../../assets/a_rainy_forest_morning.mp3'
 
 const Menu = () => {
   const [start, setStart] = useState(false)
-  const [play, { stop }] = useSound(backgroundSound, { volume: 0.5 })
+  // const [play, { stop }] = useSound(backgroundSound, { volume: 0.5 })
+  const [audio, state, controls, ref] = useAudio({
+    src: backgroundSound,
+    loop: true,
+  })
 
   const handleStart = () => {
     setStart(true)
-    play()
+    controls.play()
   }
 
   useEffect(() => {
     return () => {
       setStart(false)
-      stop()
+      controls.pause()
     }
   }, [])
 
@@ -37,6 +42,7 @@ const Menu = () => {
       >
         start
       </button>
+      {audio}
     </Html>
   )
 }

@@ -1,19 +1,19 @@
 import { Suspense } from 'react'
 
-import { TileMap } from './components/TileMap'
+import { TileMap } from './common/TileMap'
 import mapData from './map.json'
-import Menu from './Menu'
-import Sorc from './Sorc'
+import Menu from './components/Menu'
+import Sorc from './components/Sorc'
 
 import useSound from "use-sound"
-import { useKey } from 'react-use'
+import { useKey, useAudio } from 'react-use'
 import atkSound from '../assets/sword.mp3'
 
 const App = () => {
-  const [play] = useSound(atkSound, { volume: 1 })
-  const atk = () => {
+  const [audio, , controls] = useAudio({ src: atkSound, loop: false })
+  const atk = async () => {
     console.log('attack')
-    play()
+    await controls.play()
   }
   useKey('j', atk)
 
