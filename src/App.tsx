@@ -1,6 +1,8 @@
+import { SpriteProps } from '@react-three/fiber'
 import { AnimatedSprite } from './components/AnimatedSprite'
 import { TileMap } from './components/TileMap'
 import mapData from './map.json'
+import Sorc from './Sorc'
 
 const App = () => {
   return (
@@ -10,24 +12,13 @@ const App = () => {
         tileset='tileset.png'
         data={mapData}
       />
-      <AnimatedSprite
-        spriteProps={{
-          position: [2, 1, 0],
-          scale: 1
-        }}
-        geometryProps={{
-          args: [3, 3, 1]
-        }}
+      <Sorc
         currentTextureRow={11}
-        textureAtlas={{
-          tileset: 'sorc.png',
-          tileSize: [48, 48],
-          columns: 4,
-        }}
+        position={[2, 1, 0]}
+        scale={1}
       />
     </>
   )
 }
 
 export default App
-
