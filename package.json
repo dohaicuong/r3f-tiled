@@ -13,7 +13,9 @@
     "array-unflat": "^1.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "three": "^0.140.0"
+    "react-use": "^17.3.2",
+    "three": "^0.140.0",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
