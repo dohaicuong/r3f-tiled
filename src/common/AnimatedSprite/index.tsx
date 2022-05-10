@@ -1,4 +1,4 @@
-import { useTexture } from '@react-three/drei'
+import { Html, useTexture } from '@react-three/drei'
 import { BoxGeometryProps, SpriteMaterialProps, SpriteProps } from '@react-three/fiber'
 import { useMemo } from 'react'
 import { useAnimateTileRow } from './useAnimateTileRow'
@@ -10,6 +10,7 @@ type AnimatedSpriteProps = {
   materialProps?: Omit<SpriteMaterialProps, 'map'>
   textureAtlas: TextureAtlas
   currentTextureRow?: number
+  children?: React.ReactNode
 }
   
 type TextureAtlas = {
@@ -25,6 +26,7 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
   spriteProps,
   geometryProps,
   materialProps,
+  children
 }) => {
   const texture = useTexture(`assets/${textureAtlas.tileset}`)
   const map = useMemo(() => texture.clone(), [])
@@ -37,6 +39,7 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
     <sprite {...spriteProps}>
       <spriteMaterial map={map} {...materialProps} />
       <boxGeometry {...geometryProps} />
+      {children}
     </sprite>
   )
 }

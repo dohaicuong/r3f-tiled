@@ -4,8 +4,7 @@ import { TileMap } from './common/TileMap'
 import mapData from './map.json'
 import Menu from './components/Menu'
 import Sorc from './components/Sorc'
-
-
+import Girl from './components/GirlNpc'
 
 const App = () => {
   return (
@@ -16,10 +15,8 @@ const App = () => {
         tileset='tileset.png'
         data={mapData}
       />
-      <Sorc
-        position={[2, 1, 0]}
-        scale={1}
-      />
+      <Sorc name='yuki' position={[2, 1, 0]} />
+      <Girl position={[-2, 4.5, 0]} />
     </Suspense>
   )
 }

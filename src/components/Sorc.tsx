@@ -11,6 +11,7 @@ import atkSound from '../../assets/sword.mp3'
 import { Html, useHelper } from '@react-three/drei'
 
 type SorcProps = SpriteProps & {
+  name: string
   moveSpeed?: number
 }
 
@@ -41,6 +42,7 @@ const inputSchema: PlayerInputSchema = {
 }
 
 const Sorc: React.FC<SorcProps> = ({
+  name,
   moveSpeed = 5,
   ...props
 }) => {
@@ -77,7 +79,7 @@ const Sorc: React.FC<SorcProps> = ({
   // }, [])
 
   return (
-    <group>
+    <>
       <AnimatedSprite
         spriteProps={{
           ...props,
@@ -92,9 +94,13 @@ const Sorc: React.FC<SorcProps> = ({
           tileSize: [48, 48],
           columns: 4,
         }}
-      />
+      >
+        <Html position={[-0.4, 1, 0]}>
+          {name}
+        </Html>
+      </AnimatedSprite>
       <Html>{attackAudio}</Html>
-    </group>
+    </>
   )
 }
 
