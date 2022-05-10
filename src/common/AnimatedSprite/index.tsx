@@ -28,7 +28,7 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
 }) => {
   const texture = useTexture(`assets/${textureAtlas.tileset}`)
   const map = useMemo(() => texture.clone(), [])
-
+  
   useRenderSprite(map, textureAtlas.tileSize, currentTextureRow)
 
   useAnimateTileRow(map, textureAtlas.tileSize, textureAtlas.columns, textureAtlas.frameRate)
