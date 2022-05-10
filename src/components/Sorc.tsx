@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { SpriteProps, useFrame } from '@react-three/fiber'
-import { Sprite } from 'three'
+import { Box2, BoxGeometry, BoxHelper, Sprite, Vector2 } from 'three'
 
 import { AnimatedSprite } from '../common/AnimatedSprite'
 import { PlayerInputSchema, usePlayerInput } from '../common/usePlayerInput'
@@ -8,7 +8,7 @@ import { useMapTileRow, AnimationSchema } from '../common/useMapTileRow'
 
 import { useAudio } from 'react-use'
 import atkSound from '../../assets/sword.mp3'
-import { Html } from '@react-three/drei'
+import { Html, useHelper } from '@react-three/drei'
 
 type SorcProps = SpriteProps & {
   moveSpeed?: number
@@ -62,6 +62,19 @@ const Sorc: React.FC<SorcProps> = ({
       attackAudioControls.play()
     }
   }, [action])
+
+  // useEffect(() => {
+  //   const mesh = ref.current
+
+  //   const hitbox = new Box2()
+  //   hitbox.setFromCenterAndSize(
+  //     new Vector2(mesh.position.x, mesh.position.y),
+  //     new Vector2(1, 1)
+  //   )
+
+  //   const isHit = hitbox.intersectsBox()
+
+  // }, [])
 
   return (
     <group>
