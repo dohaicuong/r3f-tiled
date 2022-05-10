@@ -5,39 +5,31 @@ import mapData from './map.json'
 import Menu from './components/Menu'
 import Sorc from './components/Sorc'
 
-import { useKey, useAudio } from 'react-use'
+import { useAudio, usePrevious } from 'react-use'
 import atkSound from '../assets/sword.mp3'
 import { Html } from '@react-three/drei'
 import { useAction } from './utils/hooks/useAction'
-import { useFrame } from '@react-three/fiber'
-import { useMultiKeyPress } from './utils/hooks/useInput'
+import { useMove } from './utils/hooks/useMove'
+import { Posture, usePosture } from './utils/hooks/usePosture'
 
 const App = () => {
   const [audio, , controls] = useAudio({ src: atkSound, loop: false });
   const [position, setPosition] = useState([2, 1]);
+  const [posture, setPosture] = useState(Posture.idle_down)
   const actions = useAction();
- 
-  const atk = async () => {
-    console.log('attack')
+  const prevActions = usePrevious(actions);
+  
+  useEffect(() => {
+    if ([0, 1, 2, 3].includes(posture)) {
+      controls.seek(0)
+      controls.play()
+    }
+  }, [posture])
 
-    controls.seek(0)
-    controls.play()
-  }
-  useKey('j', atk)
-
-  useFrame(() => {
-    if (actions.length > 0) {
-      console.log(actions)
-      for (const action of actions) {
-        switch(action) {
-          case 'up': setPosition(position => [position[0], position[1]+0.06]); break;
-          case 'down': setPosition(position => [position[0], position[1]-0.06]); break;
-          case 'left': setPosition(position => [position[0]-0.06, position[1]]); break;
-          case 'right': setPosition(position => [position[0]+0.06, position[1]]); break;
-        }
-      }
-    };
-  });
+  useEffect(() => {
+    useMove(actions, setPosition, 0.07);
+    usePosture(prevActions || [], actions, setPosture);
+  }, [actions]);
 
   return (
     <Suspense fallback={null}>
@@ -48,8 +40,8 @@ const App = () => {
         data={mapData}
       />
       <Sorc
-        action='idle_down'
-        position={[...position, 0]}
+        posture={posture}
+        position={[position[0], position[1], 0]}
         scale={1}
       />
       <Html>{audio}</Html>
