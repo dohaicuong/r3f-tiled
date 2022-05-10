@@ -1,6 +1,6 @@
-import { useFrame } from "@react-three/fiber"
-import { useRef } from "react"
-import { Texture } from "three"
+import { useFrame } from '@react-three/fiber'
+import { useRef } from 'react'
+import { Texture } from 'three'
 
 export const useAnimateTileRow = (
   map: Texture,

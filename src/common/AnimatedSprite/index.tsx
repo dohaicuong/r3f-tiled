@@ -1,8 +1,8 @@
-import { useTexture } from "@react-three/drei"
-import { BoxGeometryProps, SpriteMaterialProps, SpriteProps } from "@react-three/fiber"
-import { useMemo } from "react"
-import { useAnimateTileRow } from "./useAnimateTileRow"
-import { useRenderSprite } from "./useRenderSprite"
+import { useTexture } from '@react-three/drei'
+import { BoxGeometryProps, SpriteMaterialProps, SpriteProps } from '@react-three/fiber'
+import { useMemo } from 'react'
+import { useAnimateTileRow } from './useAnimateTileRow'
+import { useRenderSprite } from './useRenderSprite'
 
 type AnimatedSpriteProps = {
   spriteProps?: SpriteProps

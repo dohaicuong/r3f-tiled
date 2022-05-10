@@ -1,5 +1,5 @@
-import { useEffect } from "react"
-import { Texture } from "three"
+import { useEffect } from 'react'
+import { Texture } from 'three'
 
 export const useRenderSprite = (
   map: Texture,
