@@ -28,44 +28,53 @@ export const usePosture = (prevActions: string[], actions: string[], setPosture:
                 };
                 return posture;
             }), 500);
-        }
-        if (prevActions.includes('up')) {
-            setPosture(posture => Posture.idle_up);
-        }
-        if (prevActions.includes('down')) {
-            setPosture(posture => Posture.idle_down);
+            return;
         }
         if (prevActions.includes('left')) {
             setPosture(posture => Posture.idle_left);
+            return;
         }
         if (prevActions.includes('right')) {
             setPosture(posture => Posture.idle_right);
+            return;
+        }
+        if (prevActions.includes('up')) {
+            setPosture(posture => Posture.idle_up);
+            return;
+        }
+        if (prevActions.includes('down')) {
+            setPosture(posture => Posture.idle_down);
+            return;
         }
     }
     if (actions.length > 0) {        
         if (prevActions.length === 0 && actions.length === 1 && actions.includes('enter')) {
             setPosture(posture => {
                 switch(posture) {
-                    case Posture.idle_up || Posture.walk_up: return Posture.atk_up;
-                    case Posture.idle_left || Posture.walk_left: return Posture.atk_left;
-                    case Posture.idle_right || Posture.walk_right: return Posture.atk_right;
-                    case Posture.idle_down || Posture.walk_down: return Posture.atk_down;
+                    case Posture.idle_up: case Posture.walk_up: return Posture.atk_up;
+                    case Posture.idle_left: case Posture.walk_left: return Posture.atk_left;
+                    case Posture.idle_right: case Posture.walk_right: return Posture.atk_right;
+                    case Posture.idle_down: case Posture.walk_down: return Posture.atk_down;
                 };
                 return posture;
             });
-        }
-        if (actions.includes('up')) {
-            setPosture(posture => Posture.walk_up);
-        }
-        if (actions.includes('down')) {
-            setPosture(posture => Posture.walk_down);
+            return;
         }
         if (actions.includes('left')) {
             setPosture(posture => Posture.walk_left);
+            return;
         }
         if (actions.includes('right')) {
             setPosture(posture => Posture.walk_right);
+            return;
+        }
+        if (actions.includes('up')) {
+            setPosture(posture => Posture.walk_up);
+            return;
+        }
+        if (actions.includes('down')) {
+            setPosture(posture => Posture.walk_down);
+            return;
         }
     }
-    return Posture.idle_down;
 }
