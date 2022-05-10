@@ -5,14 +5,14 @@ import backgroundSound from '../../assets/a_rainy_forest_morning.mp3'
 
 const Menu = () => {
   const [start, setStart] = useState(false)
-  // const [play, { stop }] = useSound(backgroundSound, { volume: 0.5 })
-  const [audio, state, controls, ref] = useAudio({
+  const [audio, , controls] = useAudio({
     src: backgroundSound,
     loop: true,
   })
 
   const handleStart = () => {
     setStart(true)
+    controls.volume(0.3)
     controls.play()
   }
 
