@@ -16,5 +16,5 @@ export const useRenderSprite = (
     
     map.offset.x = 0 * frameWidth / map.image.width
     map.offset.y = yFrame * frameHeight / map.image.height
-  }, [])
+  }, [currentRow])
 }
