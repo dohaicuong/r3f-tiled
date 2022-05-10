@@ -10,11 +10,14 @@ import { useKey, useAudio } from 'react-use'
 import atkSound from '../assets/sword.mp3'
 import { Html } from '@react-three/drei'
 import { useAction } from './utils/hooks/useAction'
+import { useFrame } from '@react-three/fiber'
+import { useMultiKeyPress } from './utils/hooks/useInput'
 
 const App = () => {
   const [audio, , controls] = useAudio({ src: atkSound, loop: false });
   const [position, setPosition] = useState([2, 1]);
-  const action = useAction();
+  const actions = useAction();
+ 
   const atk = async () => {
     console.log('attack')
 
@@ -23,16 +26,18 @@ const App = () => {
   }
   useKey('j', atk)
 
-  useEffect(() => {
-    if (action) {
-      switch(action) {
-        case 'up': setPosition([position[0], position[1]+1]); break;
-        case 'down': setPosition([position[0], position[1]-1]); break;
-        case 'left': setPosition([position[0]-1, position[1]]); break;
-        case 'right': setPosition([position[0]+1, position[1]]); break;
+  useFrame(() => {
+    if (actions.length > 0) {
+      for (const action of actions) {
+        switch(action) {
+          case 'up': setPosition(position => [position[0], position[1]+0.1]); break;
+          case 'down': setPosition(position => [position[0], position[1]-0.1]); break;
+          case 'left': setPosition(position => [position[0]-0.1, position[1]]); break;
+          case 'right': setPosition(position => [position[0]+0.1, position[1]]); break;
+        }
       }
     };
-  }, [action]);
+  });
 
   return (
     <Suspense fallback={null}>

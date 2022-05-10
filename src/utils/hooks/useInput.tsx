@@ -1,29 +1,26 @@
 import { useState, useEffect } from "react";
 
-export const useInput = (targetKey: string) => {
-    // State for keeping track of whether key is pressed
-    const [keyPressed, setKeyPressed] = useState<boolean>(false);
-    // If pressed key is our target key then set to true
+export function useInput() {
+    const [keysPressed, setKeyPressed] = useState(new Set<string>([]));
+  
     function downHandler({ key } : any) {
-        if (key === targetKey) {
-        setKeyPressed(true);
-        }
+        keysPressed.add(key)
+        setKeyPressed(new Set<string>(keysPressed.values()));
     }
-    // If released key is our target key then set to false
+  
     const upHandler = ({ key } : any) => {
-        if (key === targetKey) {
-        setKeyPressed(false);
-        }
+        keysPressed.delete(key);
+        setKeyPressed(new Set<string>(keysPressed.values()));
     };
-    // Add event listeners
+  
     useEffect(() => {
         window.addEventListener("keydown", downHandler);
         window.addEventListener("keyup", upHandler);
-        // Remove event listeners on cleanup
         return () => {
-        window.removeEventListener("keydown", downHandler);
-        window.removeEventListener("keyup", upHandler);
+            window.removeEventListener("keydown", downHandler);
+            window.removeEventListener("keyup", upHandler);
         };
     }, []); // Empty array ensures that effect is only run on mount and unmount
-    return keyPressed;
-};
+    
+    return keysPressed;
+  }

@@ -1,30 +1,23 @@
 import { useInput } from "./useInput";
 
 export const useAction = () => {
-    const wPress = useInput("w");
-    const sPress = useInput("s");
-    const aPress = useInput("a");
-    const dPress = useInput("d");
-    const upPress = useInput("ArrowUp");
-    const rightPress = useInput("ArrowRight");
-    const downPress = useInput("ArrowDown");
-    const leftPress = useInput("ArrowLeft");
-    const keyPress = useInput("Enter");
+    const keys = useInput();
+    const actions = [];
     
-    if (wPress || upPress) {
-        return 'up';
+    if (keys.has('w') || keys.has('ArrowUp')) {
+        actions.push('up');
     } 
-    if(sPress || downPress) {
-        return 'down';
+    if (keys.has('s') || keys.has('ArrowDown')) {
+        actions.push('down');
+    } 
+    if (keys.has('a') || keys.has('LeftDown')) {
+        actions.push('left');
     }
-    if (aPress || leftPress) {
-        return 'left';
+    if (keys.has('d') || keys.has('RightDown')) {
+        actions.push('right');
+    } 
+    if (keys.has('Enter')) {
+        actions.push('enter');
     }
-    if (dPress || rightPress) {
-        return 'right';
-    }
-    if (keyPress) {
-        return 'enter';
-    }
-    return null;
+    return actions;
 };
