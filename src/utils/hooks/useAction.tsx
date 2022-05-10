@@ -10,10 +10,10 @@ export const useAction = () => {
     if (keys.has('s') || keys.has('ArrowDown')) {
         actions.push('down');
     } 
-    if (keys.has('a') || keys.has('LeftDown')) {
+    if (keys.has('a') || keys.has('ArrowLeft')) {
         actions.push('left');
     }
-    if (keys.has('d') || keys.has('RightDown')) {
+    if (keys.has('d') || keys.has('ArrowRight')) {
         actions.push('right');
     } 
     if (keys.has('Enter')) {

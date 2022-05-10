@@ -28,12 +28,13 @@ const App = () => {
 
   useFrame(() => {
     if (actions.length > 0) {
+      console.log(actions)
       for (const action of actions) {
         switch(action) {
-          case 'up': setPosition(position => [position[0], position[1]+0.1]); break;
-          case 'down': setPosition(position => [position[0], position[1]-0.1]); break;
-          case 'left': setPosition(position => [position[0]-0.1, position[1]]); break;
-          case 'right': setPosition(position => [position[0]+0.1, position[1]]); break;
+          case 'up': setPosition(position => [position[0], position[1]+0.06]); break;
+          case 'down': setPosition(position => [position[0], position[1]-0.06]); break;
+          case 'left': setPosition(position => [position[0]-0.06, position[1]]); break;
+          case 'right': setPosition(position => [position[0]+0.06, position[1]]); break;
         }
       }
     };
