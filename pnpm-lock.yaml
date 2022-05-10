@@ -13,7 +13,6 @@ specifiers:
   react-use: ^17.3.2
   three: ^0.140.0
   typescript: ^4.6.3
-  use-sound: ^4.0.1
   vite: ^2.9.7
 
 dependencies:
@@ -24,7 +23,6 @@ dependencies:
   react-dom: 18.1.0_react@18.1.0
   react-use: 17.3.2_ef5jwxihqo6n7gxfmzogljlgcm
   three: 0.140.0
-  use-sound: 4.0.1_react@18.1.0
 
 devDependencies:
   '@types/react': 18.0.9
@@ -975,10 +973,6 @@ packages:
       function-bind: 1.1.1
     dev: true
 
-  /howler/2.2.3:
-    resolution: {integrity: sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg==}
-    dev: false
-
   /hyphenate-style-name/1.0.4:
     resolution: {integrity: sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==}
     dev: false
@@ -1464,15 +1458,6 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
-
-  /use-sound/4.0.1_react@18.1.0:
-    resolution: {integrity: sha512-hykJ86kNcu6y/FzlSHcQxhjSGMslZx2WlfLpZNoPbvueakv4OF3xPxEtGV2YmculrIaH0tPp9LtG4jgy17xMWg==}
-    peerDependencies:
-      react: '>=16.8'
-    dependencies:
-      howler: 2.2.3
-      react: 18.1.0
-    dev: false
 
   /utility-types/3.10.0:
     resolution: {integrity: sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==}

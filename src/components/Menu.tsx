@@ -1,6 +1,5 @@
 import { Html } from "@react-three/drei"
 import { useEffect, useState } from "react"
-import useSound from "use-sound"
 import { useAudio } from 'react-use'
 import backgroundSound from '../../assets/a_rainy_forest_morning.mp3'
 

@@ -5,7 +5,6 @@ import mapData from './map.json'
 import Menu from './components/Menu'
 import Sorc from './components/Sorc'
 
-import useSound from "use-sound"
 import { useKey, useAudio } from 'react-use'
 import atkSound from '../assets/sword.mp3'
 import { Html } from '@react-three/drei'
