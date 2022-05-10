@@ -13,7 +13,7 @@ const App = () => {
         data={mapData}
       />
       <Sorc
-        currentTextureRow={11}
+        action='idle_up'
         position={[2, 1, 0]}
         scale={1}
       />
