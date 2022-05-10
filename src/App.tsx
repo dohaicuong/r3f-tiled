@@ -18,11 +18,11 @@ const App = () => {
         geometryProps={{
           args: [3, 3, 1]
         }}
-        textureData={{
+        currentTextureRow={11}
+        textureAtlas={{
           tileset: 'sorc.png',
           tileSize: [48, 48],
           columns: 4,
-          currentRow: 11,
         }}
       />
     </>

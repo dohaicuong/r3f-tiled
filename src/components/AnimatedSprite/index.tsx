@@ -8,35 +8,30 @@ type AnimatedSpriteProps = {
   spriteProps?: SpriteProps
   geometryProps?: BoxGeometryProps
   materialProps?: Omit<SpriteMaterialProps, 'map'>
-  textureData: TextureData
+  textureAtlas: TextureAtlas
+  currentTextureRow?: number
 }
   
-type TextureData = {
+type TextureAtlas = {
   tileset: string
   tileSize: [number, number]
   columns: number
   frameRate?: number
-  currentRow?: number
 }
 
 export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
-  textureData: {
-    tileset,
-    tileSize,
-    columns,
-    frameRate,
-    currentRow = 0,
-  },
+  currentTextureRow = 0,
+  textureAtlas,
   spriteProps,
   geometryProps,
   materialProps,
 }) => {
-  const texture = useTexture(`assets/${tileset}`)
+  const texture = useTexture(`assets/${textureAtlas.tileset}`)
   const map = useMemo(() => texture.clone(), [])
 
-  useRenderSprite(map, tileSize, currentRow)
+  useRenderSprite(map, textureAtlas.tileSize, currentTextureRow)
 
-  useAnimateTileRow(map, tileSize, columns, frameRate)
+  useAnimateTileRow(map, textureAtlas.tileSize, textureAtlas.columns, textureAtlas.frameRate)
 
   return (
     <sprite {...spriteProps}>
