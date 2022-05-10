@@ -8,12 +8,15 @@ import Sorc from './components/Sorc'
 import useSound from "use-sound"
 import { useKey, useAudio } from 'react-use'
 import atkSound from '../assets/sword.mp3'
+import { Html } from '@react-three/drei'
 
 const App = () => {
   const [audio, , controls] = useAudio({ src: atkSound, loop: false })
   const atk = async () => {
     console.log('attack')
-    await controls.play()
+
+    controls.seek(0)
+    controls.play()
   }
   useKey('j', atk)
 
@@ -30,6 +33,7 @@ const App = () => {
         position={[2, 1, 0]}
         scale={1}
       />
+      <Html>{audio}</Html>
     </Suspense>
   )
 }
