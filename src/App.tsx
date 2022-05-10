@@ -5,7 +5,7 @@ import mapData from './map.json'
 import Menu from './components/Menu'
 import Sorc from './components/Sorc'
 
-import { useKey, useAudio, usePrevious } from 'react-use'
+import { useAudio, usePrevious } from 'react-use'
 import atkSound from '../assets/sword.mp3'
 import { Html } from '@react-three/drei'
 import { useAction } from './utils/hooks/useAction'
@@ -18,15 +18,13 @@ const App = () => {
   const [posture, setPosture] = useState(Posture.idle_down)
   const actions = useAction();
   const prevActions = usePrevious(actions);
-
- 
-  const atk = async () => {
-    console.log('attack')
-
-    controls.seek(0)
-    controls.play()
-  }
-  useKey('j', atk)
+  
+  useEffect(() => {
+    if ([0, 1, 2, 3].includes(posture)) {
+      controls.seek(0)
+      controls.play()
+    }
+  }, [posture])
 
   useEffect(() => {
     useMove(actions, setPosition, 0.07);
