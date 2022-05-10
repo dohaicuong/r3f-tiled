@@ -32,7 +32,7 @@ export const TileMap: React.FC<TileMapProps> = ({
 }) => {
   return (
     <>
-      {layers.map(layer => {
+      {layers.map((layer, layerIndex) => {
         const data = unflat(layer.data, width)
         return (
           <>
@@ -40,7 +40,7 @@ export const TileMap: React.FC<TileMapProps> = ({
               <>
                 {row.map((tileId, tileIndex) => (
                   <Tile
-                    key={`${rowIndex}_${tileIndex}`}
+                    key={`${layerIndex}_${rowIndex}_${tileIndex}`}
 
                     source={tileset}
                     tileWidth={tilewidth}

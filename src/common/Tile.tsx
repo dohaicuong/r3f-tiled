@@ -37,7 +37,7 @@ export const Tile: React.FC<TileProps> = ({
     map.offset.y = yIndex * tileHeight / imageHeight
   }, [])
 
-  if (tileId === 0) return <></>
+  if (tileId === 0) return null
 
   return (
     <sprite position={[...position, 0] as any} scale={1}>
