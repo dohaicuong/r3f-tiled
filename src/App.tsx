@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 import { TileMap } from './common/TileMap'
 import mapData from './map.json'
@@ -9,9 +9,12 @@ import useSound from "use-sound"
 import { useKey, useAudio } from 'react-use'
 import atkSound from '../assets/sword.mp3'
 import { Html } from '@react-three/drei'
+import { useAction } from './utils/hooks/useAction'
 
 const App = () => {
-  const [audio, , controls] = useAudio({ src: atkSound, loop: false })
+  const [audio, , controls] = useAudio({ src: atkSound, loop: false });
+  const [position, setPosition] = useState([2, 1]);
+  const action = useAction();
   const atk = async () => {
     console.log('attack')
 
@@ -19,6 +22,17 @@ const App = () => {
     controls.play()
   }
   useKey('j', atk)
+
+  useEffect(() => {
+    if (action) {
+      switch(action) {
+        case 'up': setPosition([position[0], position[1]+1]); break;
+        case 'down': setPosition([position[0], position[1]-1]); break;
+        case 'left': setPosition([position[0]-1, position[1]]); break;
+        case 'right': setPosition([position[0]+1, position[1]]); break;
+      }
+    };
+  }, [action]);
 
   return (
     <Suspense fallback={null}>
@@ -30,7 +44,7 @@ const App = () => {
       />
       <Sorc
         action='idle_down'
-        position={[2, 1, 0]}
+        position={[...position, 0]}
         scale={1}
       />
       <Html>{audio}</Html>
