@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { SpriteProps, useFrame } from '@react-three/fiber'
 import { Box2, BoxGeometry, BoxHelper, Sprite, Vector2 } from 'three'
 
@@ -9,6 +9,9 @@ import { useMapTileRow, AnimationSchema } from '../common/useMapTileRow'
 import { useAudio } from 'react-use'
 import atkSound from '../../assets/sword.mp3'
 import { Html, useHelper } from '@react-three/drei'
+import { useAtom, useAtomValue } from 'jotai'
+import { collidableFamily } from '../families/collidable'
+import { useHitBox } from '../common/useHitBox'
 
 type SorcProps = SpriteProps & {
   name: string
@@ -49,11 +52,32 @@ const Sorc: React.FC<SorcProps> = ({
   const [action, direction, acceleration] = usePlayerInput(inputSchema)
   const animationRow = useMapTileRow(animationSchema, action, direction, 11)
 
+  const [playerPos, setPlayerPos] = useAtom(collidableFamily({ id: 'player' }))
   const ref = useRef<Sprite>(null!)
+  const girlHitBox = useHitBox('girl')
   useFrame((_, delta) => {
     if (action === 'walk') {
-      ref.current.position.x += acceleration[0] * delta
-      ref.current.position.y += acceleration[1] * delta
+      const newPos = [
+        ref.current.position.x + acceleration[0] * delta,
+        ref.current.position.y + acceleration[1] * delta
+      ]
+
+      const playerHitBox = new Box2(
+        new Vector2(newPos[0] - playerPos.width, newPos[1]),
+        new Vector2(newPos[0], newPos[1] + playerPos.height)
+      )
+
+      const isCollided = playerHitBox.intersectsBox(girlHitBox)
+      if (isCollided) return
+
+      ref.current.position.x = newPos[0]
+      ref.current.position.y = newPos[1]
+      setPlayerPos({
+        x: newPos[0],
+        y: newPos[1],
+        width: 1,
+        height: 1,
+      })
     }
   })
 

@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { createRoot, extend, events } from '@react-three/fiber'
+import { Provider as StateProvider } from 'jotai'
 
 import App from './App'
 
@@ -13,7 +14,11 @@ window.addEventListener('resize', () => {
     camera: { position: [0, 0, 40], fov: 30 },
     size: { width: window.innerWidth, height: window.innerHeight }
   })
-  root.render(<App />)
+  root.render(
+    <StateProvider>
+      <App />
+    </StateProvider>
+  )
 })
 
 window.dispatchEvent(new Event('resize'))

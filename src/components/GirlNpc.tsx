@@ -1,12 +1,29 @@
+import { useHelper } from '@react-three/drei'
 import { SpriteProps } from '@react-three/fiber'
+import { useAtom, useSetAtom } from 'jotai'
+import { useEffect, useRef } from 'react'
+import { BoxHelper, Sprite } from 'three'
 import { AnimatedSprite } from '../common/AnimatedSprite'
+import { collidableFamily } from '../families/collidable'
 
 type GirlProps = SpriteProps
 
 const Girl: React.FC<GirlProps> = props => {
+  const setPos = useSetAtom(collidableFamily({ id: 'girl' }))
+
+  const ref = useRef<Sprite>(undefined!)
+  useEffect(() => {
+    setPos({
+      x: ref.current.position.x,
+      y: ref.current.position.y,
+      width: 1,
+      height: 1
+    })
+  }, [])
+
   return (
     <AnimatedSprite
-      spriteProps={{ ...props, scale: 1 }}
+      spriteProps={{ ...props, scale: 1, ref }}
       geometryProps={{
         args: [1, 1.5, 1]
       }}
