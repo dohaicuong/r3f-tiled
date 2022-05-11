@@ -9,6 +9,15 @@ export type Collidable = {
   height?: number
 }
 
+export type userInfo = {
+  id: string
+  data?: {
+    jwt?: string,
+    mail?: string
+  },
+  oneTimeToken?: string
+}
+
 export const collidableFamily = atomFamily(
   ({
     x = 0,
@@ -16,5 +25,13 @@ export const collidableFamily = atomFamily(
     width = 1,
     height = 1,
   }: Collidable) => atom({ x, y, width, height }),
+  (a, b) => a.id === b.id
+)
+
+export const userInfoFamily = atomFamily(
+  ({
+    data = {},
+    oneTimeToken = '',
+  }: userInfo) => atom({ data, oneTimeToken }),
   (a, b) => a.id === b.id
 )

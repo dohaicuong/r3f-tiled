@@ -8,14 +8,17 @@ import { useMapTileRow, AnimationSchema } from '../common/useMapTileRow'
 
 import { useAudio } from 'react-use'
 import atkSound from '../../assets/sword.mp3'
-import { Html } from '@react-three/drei'
 
+
+import { Paper, Typography } from '@mui/material'
+import { Html } from '@react-three/drei'
 import { useAtom } from 'jotai'
-import { collidableFamily } from '../families/collidable'
+import { collidableFamily, userInfoFamily } from '../families/collidable'
 import { useHitBox } from '../common/useHitBox'
 import { useMapHitBox } from '../common/useMapHitBox'
 
-import { Paper, Typography } from '@mui/material'
+import { oneTimeLogin } from '../apis/auth'
+import { createOnePlayerUrl, openPopUp } from '../utils/openPopUp'
 
 type SorcProps = SpriteProps & {
   name: string
@@ -64,6 +67,8 @@ const Sorc: React.FC<SorcProps> = ({
   const animationRow = useMapTileRow(animationSchema, action, direction, 11)
 
   const [playerPos, setPlayerPos] = useAtom(collidableFamily({ id: 'player' }))
+  const [userInfo, setUserInfo] = useAtom(userInfoFamily({ id: 'player' }))
+
   const ref = useRef<Sprite>(null!)
   const girlHitBox = useHitBox('girl')
   const mapHitBox = useMapHitBox()
@@ -101,18 +106,11 @@ const Sorc: React.FC<SorcProps> = ({
   const girlInteractionBox = useHitBox('girl', [0.5, 0.5])
   const playerHitBox = useHitBox('player')
   useEffect(() => {
-    // const { position } = ref.current
-    // const playerInteractBox = new Box2(
-    //   new Vector2(position.x - playerPos.width, position.y),
-    //   new Vector2(position.x, position.y + playerPos.height)
-    // )
     const isInteractWithGirl = playerHitBox.intersectsBox(girlInteractionBox)
-
     if (action === 'interact' && isInteractWithGirl) {
       setIsInteractWithGirl(true)
     }
     if (!isInteractWithGirl) {
-      console.log('here')
       setIsInteractWithGirl(false)
     }
   }, [action])
@@ -122,6 +120,19 @@ const Sorc: React.FC<SorcProps> = ({
     if (action === 'attack') {
       attackAudioControls.seek(0)
       attackAudioControls.play()
+      const { jwt, mail } = userInfo.data;
+      console.log(userInfo.oneTimeToken);
+      if (userInfo.oneTimeToken) {
+        openPopUp(createOnePlayerUrl('12791396'));
+      } else {
+        oneTimeLogin(mail || '', jwt || '')
+        .then(res => {
+          const { data } = res;
+          const oneTimeToken = data.one_time_token;
+          setUserInfo({oneTimeToken, data: userInfo.data});
+          openPopUp(createOnePlayerUrl('12791396', '', oneTimeToken));
+        });
+      }
     }
   }, [action])
 
