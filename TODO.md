@@ -1,0 +1,6 @@
+- refactor code base structure to features based/screaming architecture
+- refactor, redesign game engine API
+- TODO: attack effect and hit box collision
+- SPIKE: collision, acceleration with physics engine
+- SPIKE: particle system
+- remove axios
