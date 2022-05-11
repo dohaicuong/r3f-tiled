@@ -6,7 +6,7 @@ import { PlayerAction } from '../common/usePlayerInput'
 import { useAtom } from 'jotai'
 import { collidableFamily } from '../families/collidable'
 
-export const usePlayerWalk = (
+export const useWhenPlayerWalk = (
   id: string,
   ref: React.MutableRefObject<Sprite>,
   action: PlayerAction,

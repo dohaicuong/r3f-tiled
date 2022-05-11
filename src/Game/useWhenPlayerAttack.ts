@@ -3,7 +3,7 @@ import { useAudio } from 'react-use'
 import atkSound from '../../assets/sword.mp3'
 import { PlayerAction } from '../common/usePlayerInput'
 
-export const usePlayerAttack = (action: PlayerAction) => {
+export const useWhenPlayerAttack = (action: PlayerAction) => {
   const [attackAudio, , attackAudioControls] = useAudio({ src: atkSound, loop: false })
   // const [userInfo, setUserInfo] = useAtom(userInfoFamily({ id: 'player' }))
 

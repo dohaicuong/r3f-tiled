@@ -87,7 +87,16 @@ const Sorc: React.FC<SorcProps> = ({
         }}
       >
         <Html position={[-0.4, 1, 0]}>
-          {name}
+          <Typography
+            style={{
+              color: '#ffe100',
+              fontWeight: 900,
+              fontSize: 25,
+              textShadow: '0px 1px 4px black',
+            }}
+          >
+            {name}
+          </Typography>
         </Html>
       </AnimatedSprite>
 
