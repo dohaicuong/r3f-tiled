@@ -8,9 +8,9 @@ import { AnimatedSprite } from '../common/AnimatedSprite'
 import { PlayerInputSchema, usePlayerInput } from '../common/usePlayerInput'
 import { useMapTileRow, AnimationSchema } from '../common/useMapTileRow'
 
-import { usePlayerWalk } from './usePlayerWalk'
-import { usePlayerAttack } from './usePlayerAttack'
-import { usePlayerInteract } from '../common/usePlayerInteract'
+import { useWhenPlayerWalk } from './useWhenPlayerWalk'
+import { useWhenPlayerAttack } from './useWhenPlayerAttack'
+import { useWhenPlayerInteract } from '../common/useWhenPlayerInteract'
 
 type SorcProps = SpriteProps & {
   atom_id: string
@@ -61,13 +61,13 @@ const Sorc: React.FC<SorcProps> = ({
   const animationRow = useMapTileRow(animationSchema, action, direction, 11)
 
   const ref = useRef<Sprite>(null!)
-  usePlayerWalk(atom_id, ref, action, acceleration)
+  useWhenPlayerWalk(atom_id, ref, action, acceleration)
 
-  const [attackAudio] = usePlayerAttack(action)
+  const [attackAudio] = useWhenPlayerAttack(action)
 
-  const [isInteractWithGirl] = usePlayerInteract(atom_id, 'girl', action)
+  const [isInteractWithGirl] = useWhenPlayerInteract(atom_id, 'girl', action)
 
-  const [isInteractWithAvil] = usePlayerInteract(atom_id, 'anvil', action)
+  const [isInteractWithAvil] = useWhenPlayerInteract(atom_id, 'anvil', action)
 
   return (
     <>
