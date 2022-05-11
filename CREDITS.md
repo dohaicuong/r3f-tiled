@@ -1,0 +1,3 @@
+- textures is made by `franuka` from `https://franuka.itch.io/`
+- a_rainy_forest_morning is made by `Phyrnna` and from game `Epic Battle Fantasy 5`
+- sword attack sound effect is made by `videvo` from album `The Premiere Edition 10`
