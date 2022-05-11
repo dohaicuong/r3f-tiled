@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { useKeyPress, useKeyPressEvent } from 'react-use'
 
-export type Action = 'idle' | 'walk' | 'attack'
+export type Action = 'idle' | 'walk' | 'attack' | 'interact'
 
 export type Direction = 'up' | 'down' | 'left' | 'right'
 
 export type PlayerInputSchema = {
   attack: string
+  interact: string
   walk_up: string
   walk_down: string
   walk_right: string

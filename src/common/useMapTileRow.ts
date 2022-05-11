@@ -16,6 +16,11 @@ export type AnimationSchema = {
   idle_right: number
   idle_left: number
   idle_down: number
+
+  interact_up: number
+  interact_right: number
+  interact_left: number
+  interact_down: number
 }
 
 export const useMapTileRow = (

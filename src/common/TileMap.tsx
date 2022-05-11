@@ -1,4 +1,7 @@
 import unflat from 'array-unflat'
+import { useSetAtom } from 'jotai'
+import { useEffect, useRef } from 'react'
+import { collidableFamily } from '../families/collidable'
 import { Tile } from './Tile'
 
 type TileMapProps = {
@@ -30,12 +33,22 @@ export const TileMap: React.FC<TileMapProps> = ({
     layers,
   }
 }) => {
+  const setColliable = useSetAtom(collidableFamily({ id: 'map' }))
+  useEffect(() => {
+    setColliable({
+      x: padding[0] - 1,
+      y: padding[1] + 1,
+      width,
+      height,
+    })
+  }, [])
+
   return (
-    <>
+    <group>
       {layers.map((layer, layerIndex) => {
         const data = unflat(layer.data, width)
         return (
-          <>
+          <group>
             {data.map((row, rowIndex) => (
               <>
                 {row.map((tileId, tileIndex) => (
@@ -55,9 +68,9 @@ export const TileMap: React.FC<TileMapProps> = ({
                 ))}
               </>
             ))}
-          </>
+          </group>
         )
       })}
-    </>
+    </group>
   )
 }

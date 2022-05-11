@@ -1,8 +1,8 @@
-import { useHelper } from '@react-three/drei'
+import { Html } from '@react-three/drei'
 import { SpriteProps } from '@react-three/fiber'
-import { useAtom, useSetAtom } from 'jotai'
+import { useSetAtom } from 'jotai'
 import { useEffect, useRef } from 'react'
-import { BoxHelper, Sprite } from 'three'
+import { Sprite } from 'three'
 import { AnimatedSprite } from '../common/AnimatedSprite'
 import { collidableFamily } from '../families/collidable'
 
@@ -33,7 +33,19 @@ const Girl: React.FC<GirlProps> = props => {
         tileSize: [16, 24],
         columns: 4,
       }}
-    />
+    >
+      <Html position={[-0.1, 1, 0]}>
+        <span
+          style={{
+            color: '#c98f19',
+            fontWeight: 900,
+            fontSize: 25,
+          }}
+        >
+          ?
+        </span>
+      </Html>
+    </AnimatedSprite>
   )
 }
 

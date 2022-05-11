@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { SpriteProps, useFrame } from '@react-three/fiber'
-import { Box2, BoxGeometry, BoxHelper, Sprite, Vector2 } from 'three'
+import { Box2, Sprite, Vector2 } from 'three'
 
 import { AnimatedSprite } from '../common/AnimatedSprite'
 import { PlayerInputSchema, usePlayerInput } from '../common/usePlayerInput'
@@ -8,10 +8,14 @@ import { useMapTileRow, AnimationSchema } from '../common/useMapTileRow'
 
 import { useAudio } from 'react-use'
 import atkSound from '../../assets/sword.mp3'
-import { Html, useHelper } from '@react-three/drei'
-import { useAtom, useAtomValue } from 'jotai'
+import { Html } from '@react-three/drei'
+
+import { useAtom } from 'jotai'
 import { collidableFamily } from '../families/collidable'
 import { useHitBox } from '../common/useHitBox'
+import { useMapHitBox } from '../common/useMapHitBox'
+
+import { Paper, Typography } from '@mui/material'
 
 type SorcProps = SpriteProps & {
   name: string
@@ -33,9 +37,16 @@ const animationSchema: AnimationSchema = {
   idle_right: 9,
   idle_left: 10,
   idle_down: 11,
+
+  interact_up: 8,
+  interact_right: 9,
+  interact_left: 10,
+  interact_down: 11,
 }
 
 const inputSchema: PlayerInputSchema = {
+  interact: 'q',
+
   attack: 'j',
 
   walk_up: 'w',
@@ -55,6 +66,7 @@ const Sorc: React.FC<SorcProps> = ({
   const [playerPos, setPlayerPos] = useAtom(collidableFamily({ id: 'player' }))
   const ref = useRef<Sprite>(null!)
   const girlHitBox = useHitBox('girl')
+  const mapHitBox = useMapHitBox()
   useFrame((_, delta) => {
     if (action === 'walk') {
       const newPos = [
@@ -67,19 +79,43 @@ const Sorc: React.FC<SorcProps> = ({
         new Vector2(newPos[0], newPos[1] + playerPos.height)
       )
 
-      const isCollided = playerHitBox.intersectsBox(girlHitBox)
-      if (isCollided) return
+      const willInMap = mapHitBox.containsBox(playerHitBox)
+      const willCollidedWithGirl = playerHitBox.intersectsBox(girlHitBox)
+
+      const isMovable = [
+        willInMap,
+        !willCollidedWithGirl
+      ].every(condition => condition === true)
+      if (!isMovable) return
 
       ref.current.position.x = newPos[0]
       ref.current.position.y = newPos[1]
       setPlayerPos({
-        x: newPos[0],
-        y: newPos[1],
-        width: 1,
-        height: 1,
+        x: newPos[0], y: newPos[1],
+        width: 1, height: 1,
       })
     }
   })
+
+  const [isInteractWithGirl, setIsInteractWithGirl] = useState(false)
+  const girlInteractionBox = useHitBox('girl', [0.5, 0.5])
+  const playerHitBox = useHitBox('player')
+  useEffect(() => {
+    // const { position } = ref.current
+    // const playerInteractBox = new Box2(
+    //   new Vector2(position.x - playerPos.width, position.y),
+    //   new Vector2(position.x, position.y + playerPos.height)
+    // )
+    const isInteractWithGirl = playerHitBox.intersectsBox(girlInteractionBox)
+
+    if (action === 'interact' && isInteractWithGirl) {
+      setIsInteractWithGirl(true)
+    }
+    if (!isInteractWithGirl) {
+      console.log('here')
+      setIsInteractWithGirl(false)
+    }
+  }, [action])
 
   const [attackAudio, , attackAudioControls] = useAudio({ src: atkSound, loop: false })
   useEffect(() => {
@@ -88,19 +124,6 @@ const Sorc: React.FC<SorcProps> = ({
       attackAudioControls.play()
     }
   }, [action])
-
-  // useEffect(() => {
-  //   const mesh = ref.current
-
-  //   const hitbox = new Box2()
-  //   hitbox.setFromCenterAndSize(
-  //     new Vector2(mesh.position.x, mesh.position.y),
-  //     new Vector2(1, 1)
-  //   )
-
-  //   const isHit = hitbox.intersectsBox()
-
-  // }, [])
 
   return (
     <>
@@ -124,6 +147,15 @@ const Sorc: React.FC<SorcProps> = ({
         </Html>
       </AnimatedSprite>
       <Html>{attackAudio}</Html>
+      {isInteractWithGirl && (
+        <Html>
+          <Paper>
+            <Typography variant='h4'>
+              Hello
+            </Typography>
+          </Paper>
+        </Html>
+      )}
     </>
   )
 }
