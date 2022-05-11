@@ -1,12 +1,12 @@
 import { Suspense } from 'react'
 
-import { TileMap } from './common/TileMap'
+import { TileMap } from '../common/TileMap'
 import mapData from './map.json'
-import Menu from './components/Menu'
-import Sorc from './components/Sorc'
-import Girl from './components/GirlNpc'
+import Menu from './Menu'
+import Sorc from './Sorc'
+import Girl from './GirlNpc'
 
-const App = () => {
+const Game = () => {
   return (
     <Suspense fallback={null}>
       <Menu />
@@ -21,4 +21,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Game

@@ -14,12 +14,12 @@ const Menu = () => {
   })
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [info, setUserInfo] = useAtom(userInfoFamily({id: 'player'}));
+  const [info, setUserInfo] = useAtom(userInfoFamily({ id: 'player' }));
 
   const handleStart = async () => {
-    const response = await Auth(email, password);
-    const userInfo = response.data;
-    setUserInfo({...info, data: userInfo});
+    // const response = await Auth(email, password);
+    // const userInfo = response.data;
+    // setUserInfo({ ...info, data: userInfo });
     // const response = await auth.
     setStart(true)
     controls.volume(0.3)
@@ -34,7 +34,7 @@ const Menu = () => {
   }, [])
 
   return (
-    <Html style={{ display: start ? 'none' : 'inline' }}>
+    <Html style={{ display: start ? 'none' : 'inline', zIndex: 500 }}>
       <div
         style={{
           marginLeft: -1000,
@@ -43,6 +43,7 @@ const Menu = () => {
           opacity: 0.3,
           height: '300vh',
           width: '300vw',
+          zIndex: 500,
         }}
       />
       <input onChange={e => setEmail(e.target.value)} placeholder="email" style={{ position: 'absolute', top: -80, left: 0 }} />
