@@ -1,7 +1,10 @@
 import { Html } from '@react-three/drei'
+import { useAtom, useSetAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { useAudio } from 'react-use'
 import backgroundSound from '../../assets/a_rainy_forest_morning.mp3'
+import { Auth } from '../apis/auth'
+import { userInfoFamily } from '../families/collidable'
 
 const Menu = () => {
   const [start, setStart] = useState(false)
@@ -9,8 +12,15 @@ const Menu = () => {
     src: backgroundSound,
     loop: true,
   })
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [info, setUserInfo] = useAtom(userInfoFamily({id: 'player'}));
 
-  const handleStart = () => {
+  const handleStart = async () => {
+    const response = await Auth(email, password);
+    const userInfo = response.data;
+    setUserInfo({...info, data: userInfo});
+    // const response = await auth.
     setStart(true)
     controls.volume(0.3)
     controls.play()
@@ -35,6 +45,8 @@ const Menu = () => {
           width: '300vw',
         }}
       />
+      <input onChange={e => setEmail(e.target.value)} placeholder="email" style={{ position: 'absolute', top: -80, left: 0 }} />
+      <input type="password" onChange={e => setPassword(e.target.value)} placeholder="password" style={{ position: 'absolute', top: -30, left: 0 }} />
       <button
         style={{ position: 'absolute', top: 0, left: 0 }}
         onClick={handleStart}
