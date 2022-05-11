@@ -9,9 +9,11 @@ import { useMapTileRow, AnimationSchema } from '../common/useMapTileRow'
 import { useAudio } from 'react-use'
 import atkSound from '../../assets/sword.mp3'
 import { Html, useHelper } from '@react-three/drei'
-import { useAtom, useAtomValue } from 'jotai'
-import { collidableFamily } from '../families/collidable'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { collidableFamily, userInfoFamily } from '../families/collidable'
 import { useHitBox } from '../common/useHitBox'
+import { oneTimeLogin } from '../apis/auth'
+import { createOnePlayerUrl, openPopUp } from '../utils/openPopUp'
 
 type SorcProps = SpriteProps & {
   name: string
@@ -53,6 +55,8 @@ const Sorc: React.FC<SorcProps> = ({
   const animationRow = useMapTileRow(animationSchema, action, direction, 11)
 
   const [playerPos, setPlayerPos] = useAtom(collidableFamily({ id: 'player' }))
+  const [userInfo, setUserInfo] = useAtom(userInfoFamily({ id: 'player' }))
+
   const ref = useRef<Sprite>(null!)
   const girlHitBox = useHitBox('girl')
   useFrame((_, delta) => {
@@ -86,6 +90,19 @@ const Sorc: React.FC<SorcProps> = ({
     if (action === 'attack') {
       attackAudioControls.seek(0)
       attackAudioControls.play()
+      const { jwt, mail } = userInfo.data;
+      console.log(userInfo.oneTimeToken);
+      if (userInfo.oneTimeToken) {
+        openPopUp(createOnePlayerUrl('12791396'));
+      } else {
+        oneTimeLogin(mail || '', jwt || '')
+        .then(res => {
+          const { data } = res;
+          const oneTimeToken = data.one_time_token;
+          setUserInfo({oneTimeToken, data: userInfo.data});
+          openPopUp(createOnePlayerUrl('12791396', '', oneTimeToken));
+        });
+      }
     }
   }, [action])
 
