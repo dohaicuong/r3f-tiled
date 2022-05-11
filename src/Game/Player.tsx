@@ -89,10 +89,11 @@ const Sorc: React.FC<SorcProps> = ({
         <Html position={[-0.4, 1, 0]}>
           <Typography
             style={{
-              color: '#ffe100',
+              zIndex: 1,
+              color: '#000',
               fontWeight: 900,
-              fontSize: 25,
-              textShadow: '0px 1px 4px black',
+              fontSize: 18,
+              textShadow: '0px 1px 4px #fff',
             }}
           >
             {name}

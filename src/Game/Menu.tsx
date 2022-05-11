@@ -1,3 +1,4 @@
+import { Button, Paper, TextField, Typography } from '@mui/material'
 import { Html } from '@react-three/drei'
 import { useAtom, useSetAtom } from 'jotai'
 import { useEffect, useState } from 'react'
@@ -46,14 +47,31 @@ const Menu = () => {
           zIndex: 500,
         }}
       />
-      <input onChange={e => setEmail(e.target.value)} placeholder="email" style={{ position: 'absolute', top: -80, left: 0 }} />
-      <input type="password" onChange={e => setPassword(e.target.value)} placeholder="password" style={{ position: 'absolute', top: -30, left: 0 }} />
-      <button
-        style={{ position: 'absolute', top: 0, left: 0 }}
-        onClick={handleStart}
-      >
-        start
-      </button>
+      <Paper style={{ zIndex: 500, position: 'absolute', top: -80, left: -200, padding: 24 }}>
+        <Typography textAlign='center' variant='h4' style={{ marginBottom: 32 }}>
+          Connect to the GoVerse
+        </Typography>
+        <TextField
+          label='email'
+          type='email'
+          fullWidth
+          style={{ marginBottom: 16 }}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <TextField
+          label='password'
+          type='password'
+          fullWidth
+          style={{ marginBottom: 16 }}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <Button
+          variant='contained'
+          onClick={handleStart}
+        >
+          start
+        </Button>
+      </Paper>
       {audio}
     </Html>
   )
