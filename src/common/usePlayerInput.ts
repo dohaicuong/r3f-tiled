@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { useKeyPress, useKeyPressEvent } from 'react-use'
 
-export type Action = 'idle' | 'walk' | 'attack' | 'interact'
+export type PlayerAction = 'idle' | 'walk' | 'attack' | 'interact'
 
-export type Direction = 'up' | 'down' | 'left' | 'right'
+export type PlayerDirection = 'up' | 'down' | 'left' | 'right'
 
 export type PlayerInputSchema = {
   attack: string
@@ -17,13 +17,13 @@ export type PlayerInputSchema = {
 export const usePlayerInput = (
   schema: PlayerInputSchema,
   moveSpeed = 5,
-): [Action, Direction, [number, number]] => {
+): [PlayerAction, PlayerDirection, [number, number]] => {
   const [moveUp] = useKeyPress(schema.walk_up)
   const [moveDown] = useKeyPress(schema.walk_down)
   const [moveLeft] = useKeyPress(schema.walk_left)
   const [moveRight] = useKeyPress(schema.walk_right)
 
-  const [action, setAction] = useState<Action>('idle')
+  const [action, setAction] = useState<PlayerAction>('idle')
   useKeyPressEvent(
     ({ key }) => Object.values(schema).includes(key),
     ({ key }) => {
@@ -34,7 +34,7 @@ export const usePlayerInput = (
         .split('_')
         ?.[0]
         || undefined
-      if (action) setAction(action as Action)
+      if (action) setAction(action as PlayerAction)
     },
     () => {
       if (moveUp || moveDown || moveRight || moveLeft) return
@@ -46,7 +46,7 @@ export const usePlayerInput = (
     if (!moveUp && !moveDown && !moveLeft && !moveRight) setAction('idle')
   }, [moveUp, moveDown, moveLeft, moveRight])
 
-  const directionRef = useRef<Direction>('down')
+  const directionRef = useRef<PlayerDirection>('down')
   useEffect(() => {
     if (moveUp) directionRef.current = 'up'
     else if (moveDown) directionRef.current = 'down'

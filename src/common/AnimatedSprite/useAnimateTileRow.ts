@@ -12,6 +12,7 @@ export const useAnimateTileRow = (
   const currentFrame = useRef<number>(0)
   
   useFrame(({ clock }) => {
+    if (columns < 2) return
     if (interval.current === undefined) interval.current = clock.oldTime
     
     const frameWidth = tileSize[0]

@@ -7,11 +7,11 @@ import { Sprite } from 'three'
 import { AnimatedSprite } from '../common/AnimatedSprite'
 import { collidableFamily } from '../families/collidable'
 
-type GirlProps = SpriteProps & {
+type AnvilProps = SpriteProps & {
   atom_id: string
 }
 
-const Girl: React.FC<GirlProps> = ({ atom_id, ...props }) => {
+const Anvil: React.FC<AnvilProps> = ({ atom_id, ...props }) => {
   const setPos = useSetAtom(collidableFamily({ id: atom_id }))
 
   const ref = useRef<Sprite>(undefined!)
@@ -28,13 +28,13 @@ const Girl: React.FC<GirlProps> = ({ atom_id, ...props }) => {
     <AnimatedSprite
       spriteProps={{ ...props, scale: 1, ref }}
       geometryProps={{
-        args: [1, 1.5, 1]
+        args: [1, 1, 1]
       }}
-      currentTextureRow={3}
+      currentTextureRow={0}
       textureAtlas={{
-        tileset: 'npc_girl.png',
-        tileSize: [16, 24],
-        columns: 4,
+        tileset: 'anvil.png',
+        tileSize: [16, 16],
+        columns: 1,
       }}
     >
       <Html position={[-0.15, 1, 0]}>
@@ -46,11 +46,11 @@ const Girl: React.FC<GirlProps> = ({ atom_id, ...props }) => {
             textShadow: '0px 1px 4px black',
           }}
         >
-          ?
+          !
         </Typography>
       </Html>
     </AnimatedSprite>
   )
 }
 
-export default Girl
+export default Anvil
