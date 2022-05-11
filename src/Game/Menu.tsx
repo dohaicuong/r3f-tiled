@@ -47,7 +47,7 @@ const Menu = () => {
           zIndex: 500,
         }}
       />
-      <Paper style={{ zIndex: 500, position: 'absolute', top: -80, left: -200, padding: 24 }}>
+      <Paper style={{ zIndex: 500, position: 'absolute', top: -60, left: -200, padding: 24 }}>
         <Typography textAlign='center' variant='h4' style={{ marginBottom: 32 }}>
           Connect to the GoVerse
         </Typography>
