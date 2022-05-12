@@ -30,7 +30,7 @@ const Game = () => {
       />
       <TileMap
         padding={[-14, -11]}
-        tileset='tileset.png'
+        tileset={tileset}
         data={mapData}
       />
       <QuestLineProvider>
