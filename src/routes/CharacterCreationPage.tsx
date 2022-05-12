@@ -1,5 +1,5 @@
 import { Box, Select, Grid, Hidden, Stack, Typography, Link, TextField, MenuItem, InputLabel, FormControl, Avatar, Button } from '@mui/material'
-import backgroundImage from '../../assets/UI/map.png';
+import backgroundImage from '../../assets/UI/half_map.png';
 import Go1Logo from '../../assets/UI/go1_logo.svg';
 import avatar1 from '../../assets/UI/avatars/avatar1.png'
 import avatar2 from '../../assets/UI/avatars/avatar2.png'
