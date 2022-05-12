@@ -6,7 +6,12 @@ import avatar2 from '../../assets/UI/avatars/avatar2.png'
 import avatar3 from '../../assets/UI/avatars/avatar3.png'
 import avatar4 from '../../assets/UI/avatars/avatar4.png'
 import { colors } from '../theme';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createNewAccount, oneTimeLogin } from '../apis/auth';
+import { useAtom } from 'jotai';
+import { authAtom } from '../atoms/auth';
+import { useNavigate } from 'react-router-dom';
+
 const roles = [
   'Deleloper',
   'Product Manager',
@@ -23,11 +28,55 @@ const avatars = [
 
 
 const CharacterCreationPage = () => {
-  const [firtName, setFirstName] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState(null);
-  const [avatar, setAvatar] = useState(null);
+  const [role, setRole] = useState('');
+  const [avatar, setAvatar] = useState({value: 0, url: ''});
+  const [auth, setAuth] = useAtom(authAtom);
+  const navigate = useNavigate();
+
+  const clearInput = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+    setRole('');
+    setAvatar({value: 0, url: ''});
+  }
+
+  useEffect(() => {
+    const authed = auth.data.jwt;
+    if (authed) {
+      navigate('/select-map');
+    }
+  }, [auth]);
+
+  const handleRegister = async () => {
+    const payload = {
+      email,
+      password,
+      first_name: firstName,
+      last_name: lastName,
+      data: {
+        "consent":{"term_policy":1,"term_tos":1,"term_collection":1,"term_privacy":1},
+        "cinque": {
+          role,
+          avatar: avatar.value
+        }
+      }
+    };
+    const response = await createNewAccount(payload);
+    const {id, jwt, data, uuid, first_name, last_name, mail} = response.data;
+    // const res = await oneTimeLogin(mail, jwt);
+    // const { one_time_token }  = res.data;
+    setAuth({
+      ...auth,
+      // oneTimeToken: one_time_token,
+      data: {id, jwt, data, uuid, first_name, last_name, mail}
+    });
+  }
 
   return (
     <Box component="div" sx={{ height: '100vh'}}>
@@ -57,18 +106,18 @@ const CharacterCreationPage = () => {
               </Typography>
               <Stack direction="column" paddingTop={3} paddingX={2} spacing={1}>
                 <Stack direction="row"  spacing={1}>
-                  <TextField required id="first-name" label="First Name" />
-                  <TextField required id="last-name" label="Last Name" />
+                  <TextField onChange={evt => setFirstName(evt.target.value as string)} required id="first-name" label="First Name" />
+                  <TextField onChange={evt => setLastName(evt.target.value as string)} required id="last-name" label="Last Name" />
                 </Stack>
-                <TextField required fullWidth id="email" label="Fmail" />
-                <TextField required fullWidth id="password" label="Password" />
+                <TextField onChange={evt => setEmail(evt.target.value as string)} required fullWidth id="email" label="Email" />
+                <TextField type="password" onChange={evt => setPassword(evt.target.value as string)}  required fullWidth id="password" label="Password" />
                 <FormControl required>
                   <InputLabel id="role-label">What's your role?</InputLabel>
                   <Select
                     labelId="role-label"
                     id="role"
-                    value={null}
-                    onChange={() => {}}
+                    value={role}
+                    onChange={evt => {setRole(evt.target.value as string)}}
                     label="What's your role?"
                   >
                     {roles.map((item) => (
@@ -83,16 +132,18 @@ const CharacterCreationPage = () => {
                   <Stack direction="row" spacing={3}>
                     {avatars.map((item => (
                       <Avatar 
-                        onClick={() => console.log('click')} 
+                        onClick={() => setAvatar(item)} 
                         variant="rounded" 
                         src={item.url} 
-                        sx={{width: 60, height: 60, cursor: "pointer", background: colors.default}}  
+                        sx={{width: 60, height: 60, cursor: "pointer", background: item.value===(avatar.value)?colors.default:null}}  
                       />
                     )))}
                   </Stack>
                 </Stack>
                 <Stack paddingTop={3}>
-                  <Button variant="contained" color='secondary'>
+                  <Button variant="contained" color='secondary'
+                    onClick={handleRegister}
+                  >
                     Create new account
                   </Button>
                 </Stack>
