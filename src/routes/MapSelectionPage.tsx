@@ -31,6 +31,13 @@ const MapSelectionPage = () => {
     controls.play()
   }, [])
 
+  const [score, setScore] = useState(0)
+  useEffect(() => {
+    fetch(`https://api.dev.go1.cloud/cinque/scores/me?jwt=${auth.data.jwt}`)
+      .then(res => res.json())
+      .then(res => setScore(res.score))
+  }, [])
+
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -157,7 +164,8 @@ const MapSelectionPage = () => {
       <MapWrapprer>
         <ImageMap src={mapPage}
           map={mapArea}
-          onMapClick={(area, index) => {
+          onMapClick={(area: any, index : number) => {
+            console.log(index);
             if (index === 0) {
               navigate('/game')
             }
@@ -198,7 +206,7 @@ const MapSelectionPage = () => {
               <img src={getAvatar()} style={{width: 30, height: 30}}></img>
             </div>
             <div style={{ margin: 'auto', width: 160, height: 40, marginTop: 5, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-              <Typography>Completed 20%</Typography>
+              <Typography>Completed {score/250*100}%</Typography>
             </div>
             <div style={{ margin: 'auto', width: 160, height: 40, marginTop: 15, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Button color="secondary" variant="contained" onClick={() => navigate('/game')}>
