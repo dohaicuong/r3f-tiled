@@ -1,13 +1,56 @@
 import { Box, Button, Modal, Stack, styled, Typography, Popover } from '@mui/material'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import mapPage from '../../assets/UI/map.png';
 import { colors } from '../theme';
 import { ImageMap } from '@qiuz/react-image-map';
 import { useNavigate } from 'react-router-dom';
+import { usePopper } from 'react-popper';
+import panelBackgroundImage from '../../assets/UI/playerPanel/background.png';
+import avatarBackground from '../../assets/UI/playerPanel/avatar_border.png';
+import avatarBox from '../../assets/UI/playerPanel/avatar_box.png';
+import avatar1 from '../../assets/UI/avatars/avatar1.png';
+import avatar2 from '../../assets/UI/avatars/avatar2.png';
+import avatar3 from '../../assets/UI/avatars/avatar3.png';
+import avatar4 from '../../assets/UI/avatars/avatar4.png';
+import { useAtom } from 'jotai';
+import { authAtom } from '../atoms/auth';
 
 const MapSelectionPage = () => {
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const navigate = useNavigate();
+
+  const [referenceElement, setReferenceElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [-60, -250],
+        },
+      }
+    ],
+    placement: 'left-end',
+  });
+  const [auth, useAuth] = useAtom(authAtom);
+
+  useEffect(() => {
+    if (!auth.data.jwt) {
+      navigate('/');
+    }
+  }, [auth])
+
+
+  const getAvatar = () => {
+    const {data} = auth.data;
+    switch(data?.cinque?.avatar) {
+      case 1: return avatar1;
+      case 2: return avatar3;
+      case 3: return avatar3;
+      case 4: return avatar4;
+      default: return avatar1;
+    }
+  }
 
   const mapArea = [
     {
@@ -97,7 +140,7 @@ const MapSelectionPage = () => {
 
   
   return (
-    <StyledBox component='div'>
+    <StyledBox component='div' ref={setReferenceElement}>
       <MapWrapprer>
         <ImageMap src={mapPage}
           map={mapArea}
@@ -132,6 +175,23 @@ const MapSelectionPage = () => {
           {anchorEl.label}
         </Box>
       </Popover>}
+      <div ref={setPopperElement} style={{...styles.popper, zIndex:15}} {...attributes.popper}>
+        <div style={{width: 200, height: 280, paddingTop: 20, backgroundImage: `url(${panelBackgroundImage})`,backgroundSize: '100% 100%' }}>
+          <div style={{ margin: 'auto', width: 180, height: 100, paddingTop: 10, backgroundImage: `url(${avatarBackground})`,backgroundSize: '100% 100%'}}>
+            <div style={{ margin: 'auto', width: 48, height: 48, backgroundImage: `url(${avatarBox})`,backgroundSize: '100% 100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+              <img src={getAvatar()} style={{width: 30, height: 30}}></img>
+            </div>
+            <div style={{ margin: 'auto', width: 160, height: 40, marginTop: 5, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+              <Typography>Completed 20%</Typography>
+            </div>
+            <div style={{ margin: 'auto', width: 160, height: 40, marginTop: 15, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <Button color="secondary" variant="contained" onClick={() => navigate('/game')}>
+                Continue
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
     </StyledBox>
   )
 }
