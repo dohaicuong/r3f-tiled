@@ -1,21 +1,143 @@
-import { Box, Button, Modal, Stack, styled, Typography } from '@mui/material'
+import { Box, Button, Modal, Stack, styled, Typography, Popover } from '@mui/material'
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
 import mapPage from '../../assets/UI/map.png';
 import { colors } from '../theme';
 import { ImageMap } from '@qiuz/react-image-map';
+import { areArraysEqual } from '@mui/base';
+import { useNavigate } from 'react-router-dom';
 
 const MapSelectionPage = () => {
+  const [anchorEl, setAnchorEl] = useState<any>(null);
+  const navigate = useNavigate();
+
+  const mapArea = [
+    {
+      left: '8%',
+      top: '8%',
+      height: '30%',
+      width: '22%',
+      style: { cursor: 'pointer', zIndex: 20 },
+      label: 'Castle of Compliance',
+      onMouseEnter: (evt : any) => {
+        if (anchorEl) {
+          return;
+        }
+        setAnchorEl(() => ({
+          left: evt.clientX,
+          top: evt.clientY,
+          label: 'Castle of Compliance'
+        }));
+      },
+      onMouseLeave: () => setAnchorEl(null)
+    },
+    {
+      left: '65%',
+      top: '8%',
+      height: '15%',
+      width: '10%',
+      style: { cursor: 'pointer', zIndex: 20 },
+      label: 'Chambers of Secrets',
+      onMouseEnter: (evt : any) => {
+        setAnchorEl(() => ({
+          left: evt.clientX,
+          top: evt.clientY,
+          label: 'Chambers of Secrets'
+        }));
+      },
+      onMouseLeave: () => setAnchorEl(null)
+    },
+    {
+      left: '57%',
+      top: '41%',
+      height: '13%',
+      width: '13%',
+      style: { cursor: 'pointer',zIndex: 20 },
+      label: 'PVP Chanllenge',
+      onMouseEnter: (evt : any) => {
+        setAnchorEl(() => ({
+          left: evt.clientX,
+          top: evt.clientY,
+          label: 'PVP Chanllenge'
+        }));
+      },
+      onMouseLeave: () => setAnchorEl(null)
+    },
+    {
+      left: '39%',
+      top: '48%',
+      height: '16%',
+      width: '6%',
+      style: {  cursor: 'pointer', zIndex: 20 },
+      label: 'Jungle Village',
+      onMouseEnter: (evt : any) => {
+        setAnchorEl(() => ({
+          left: evt.clientX,
+          top: evt.clientY,
+          label: 'Jungle Village'
+        }));
+      },
+      onMouseLeave: () => setAnchorEl(null)
+    },
+    {
+      left: '55%',
+      top: '78%',
+      height: '10%',
+      width: '12%',
+      style: { cursor: 'pointer', zIndex: 20 },
+      label: 'Advanture Guild',
+      onMouseEnter: (evt : any) => {
+        setAnchorEl(() => ({
+          left: evt.clientX,
+          top: evt.clientY,
+          label: 'Advanture Guild'
+        }));
+      },
+      onMouseLeave: () => setAnchorEl(null)
+    },
+  ];
+
+  
   return (
     <StyledBox component='div'>
       <MapWrapprer>
-        <ImageMap src={mapPage} />
+        <ImageMap src={mapPage}
+          map={mapArea}
+          onMapClick={(area, index) => {
+            if (index == 0) {
+              navigate('/game')
+            }
+          }}
+        />
       </MapWrapprer>
       <ImageBackground src={mapPage} />
       <IntroModal />
+
+      {anchorEl && <Popover open={Boolean(anchorEl)} 
+        anchorReference="anchorPosition"
+        anchorPosition={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        onClose={() => setAnchorEl(null)}
+        disableRestoreFocus
+        sx={{
+          pointerEvents: 'none',
+        }}
+      >
+        <Box component="div" sx={{ border: 1, p: 1, bgcolor: 'background.paper', cursor: 'pointer' }}>
+          {anchorEl.label}
+        </Box>
+      </Popover>}
     </StyledBox>
   )
 }
+
+
 
 const IntroModal = () => {
   const [open, setOpen] = useState(true);
