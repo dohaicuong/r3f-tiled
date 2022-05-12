@@ -19,13 +19,11 @@ const roles = [
 ];
 
 const avatars = [
-  {value: 1, url: avatar1},
-  {value: 2, url: avatar2},
-  {value: 3, url: avatar3},
-  {value: 4, url: avatar4},
+  { value: 1, url: avatar1 },
+  { value: 2, url: avatar2 },
+  { value: 3, url: avatar3 },
+  { value: 4, url: avatar4 },
 ];
-
-
 
 const CharacterCreationPage = () => {
   const [firstName, setFirstName] = useState('');
@@ -33,7 +31,7 @@ const CharacterCreationPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
-  const [avatar, setAvatar] = useState({value: 0, url: ''});
+  const [avatar, setAvatar] = useState({ value: 0, url: '' });
   const [auth, setAuth] = useAtom(authAtom);
   const navigate = useNavigate();
 
@@ -43,7 +41,7 @@ const CharacterCreationPage = () => {
     setEmail('');
     setPassword('');
     setRole('');
-    setAvatar({value: 0, url: ''});
+    setAvatar({ value: 0, url: '' });
   }
 
   useEffect(() => {
@@ -60,8 +58,13 @@ const CharacterCreationPage = () => {
       first_name: firstName,
       last_name: lastName,
       data: {
-        "consent":{"term_policy":1,"term_tos":1,"term_collection":1,"term_privacy":1},
-        "cinque": {
+        consent:{
+          term_policy: 1,
+          term_tos: 1,
+          term_collection: 1,
+          term_privacy: 1
+        },
+        cinque: {
           role,
           avatar: avatar.value
         }
@@ -74,7 +77,7 @@ const CharacterCreationPage = () => {
     setAuth({
       ...auth,
       // oneTimeToken: one_time_token,
-      data: {id, jwt, data, uuid, first_name, last_name, mail}
+      data: { id, jwt, data, uuid, first_name, last_name, mail }
     });
   }
 
