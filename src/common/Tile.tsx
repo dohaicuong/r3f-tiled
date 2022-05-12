@@ -16,6 +16,7 @@ export const Tile: React.FC<TileProps> = ({
   tileId,
   tileWidth,
   tileHeight,
+  ...props
 }) => {
   const texture = useTexture(`assets/${source}`)
   const map = useMemo(() => texture.clone(), [])
@@ -40,7 +41,7 @@ export const Tile: React.FC<TileProps> = ({
   if (tileId === 0) return null
 
   return (
-    <sprite position={[...position, 0] as any} scale={1}>
+    <sprite position={[...position, 0] as any} scale={1} {...props}>
       <spriteMaterial map={map} />
     </sprite>
   )

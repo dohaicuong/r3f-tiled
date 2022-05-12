@@ -1,5 +1,5 @@
 import axios from 'axios';
-import env from './constants';
+import * as env from './constants';
 
 export const Auth = (email: string, password: string) => {
   const endpoint = '/user/account/login?allAccounts=false';

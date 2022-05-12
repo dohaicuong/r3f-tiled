@@ -48,12 +48,12 @@ export const TileMap: React.FC<TileMapProps> = ({
       {layers.map((layer, layerIndex) => {
         const data = unflat(layer.data, width)
         return (
-          <group>
+          <group key={layerIndex}>
             {data.map((row, rowIndex) => (
-              <>
+              <group key={layerIndex + rowIndex}>
                 {row.map((tileId, tileIndex) => (
                   <Tile
-                    key={`${layerIndex}_${rowIndex}_${tileIndex}`}
+                    key={`${layerIndex + rowIndex + tileIndex}_${rowIndex}_${tileIndex}`}
 
                     source={tileset}
                     tileWidth={tilewidth}
@@ -66,7 +66,7 @@ export const TileMap: React.FC<TileMapProps> = ({
                     tileId={tileId}
                   />
                 ))}
-              </>
+              </group>
             ))}
           </group>
         )

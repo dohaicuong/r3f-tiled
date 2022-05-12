@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Provider as StateProvider } from 'jotai'
+
 import Game from '../Game'
 
 const GamePage = () => {

@@ -1,8 +1,8 @@
-import env from '../apis/constants';
+import * as env from '../apis/constants';
 const defaultConfig = "height=600, width=1000, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no";
 
 export const openPopUp = (url : string, config=defaultConfig) => {
-  window.open(
+  return window.open(
     url, 
     "newwindow", 
     config

@@ -9,9 +9,10 @@ import { collidableFamily } from '../atoms/collidable'
 
 type GirlProps = SpriteProps & {
   atom_id: string
+  hasQuest: boolean
 }
 
-const Girl: React.FC<GirlProps> = ({ atom_id, ...props }) => {
+const Girl: React.FC<GirlProps> = ({ atom_id, hasQuest, ...props }) => {
   const setPos = useSetAtom(collidableFamily({ id: atom_id }))
 
   const ref = useRef<Sprite>(undefined!)
@@ -37,18 +38,20 @@ const Girl: React.FC<GirlProps> = ({ atom_id, ...props }) => {
         columns: 4,
       }}
     >
-      <Html position={[-0.15, 1, 0]}>
-        <Typography
-          style={{
-            color: '#ffe100',
-            fontWeight: 900,
-            fontSize: 25,
-            textShadow: '0px 1px 4px black',
-          }}
-        >
-          ?
-        </Typography>
-      </Html>
+      {hasQuest && (
+        <Html position={[-0.15, 1, 0]}>
+          <Typography
+            style={{
+              color: '#ffe100',
+              fontWeight: 900,
+              fontSize: 25,
+              textShadow: '0px 1px 4px black',
+            }}
+          >
+            ?
+          </Typography>
+        </Html>    
+      )}
     </AnimatedSprite>
   )
 }
