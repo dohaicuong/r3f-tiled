@@ -17,8 +17,8 @@ const Menu: React.FC<MenuProps> = ({ isStart, onClose }) => {
 
   const handleStart = async () => {
     onClose()
-    // controls.volume(0.3)
-    // controls.play()
+    controls.volume(0.3)
+    controls.play()
   }
 
   useEffect(() => {

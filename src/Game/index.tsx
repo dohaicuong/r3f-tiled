@@ -1,4 +1,4 @@
-import { memo, Suspense, useEffect, useMemo, useState } from 'react'
+import { Suspense, useMemo, useState } from 'react'
 
 import { TileMap } from '../common/TileMap'
 import mapData from './map.json'
