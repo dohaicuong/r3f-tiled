@@ -23,6 +23,14 @@ const Anvil: React.FC<AnvilProps> = ({ atom_id, ...props }) => {
       width: 1,
       height: 1
     })
+    return () => {
+      setPos({
+        x: 9999,
+        y: 9999,
+        width: 0,
+        height: 0,
+      })
+    }
   }, [])
 
   return (

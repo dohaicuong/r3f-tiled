@@ -14,10 +14,22 @@ import avatar3 from '../../assets/UI/avatars/avatar3.png';
 import avatar4 from '../../assets/UI/avatars/avatar4.png';
 import { useAtom } from 'jotai';
 import { authAtom } from '../atoms/auth';
+import backgroundSound from '../../assets/a_rainy_forest_morning.mp3'
+import { useAudio } from 'react-use';
 
 const MapSelectionPage = () => {
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const navigate = useNavigate();
+  
+  const [audio, , controls] = useAudio({
+    src: backgroundSound,
+    loop: true,
+  })
+
+  useEffect(() => {
+    controls.volume(0.2)
+    controls.play()
+  }, [])
 
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
@@ -78,12 +90,12 @@ const MapSelectionPage = () => {
       height: '15%',
       width: '10%',
       style: { cursor: 'pointer', zIndex: 20 },
-      label: 'Chambers of Secrets',
+      label: 'Chambers of Secrets (WIP)',
       onMouseEnter: (evt : any) => {
         setAnchorEl(() => ({
           left: evt.clientX,
           top: evt.clientY,
-          label: 'Chambers of Secrets'
+          label: 'Chambers of Secrets (WIP)'
         }));
       },
       onMouseLeave: () => setAnchorEl(null)
@@ -94,12 +106,12 @@ const MapSelectionPage = () => {
       height: '13%',
       width: '13%',
       style: { cursor: 'pointer',zIndex: 20 },
-      label: 'PVP Chanllenge',
+      label: 'PVP Arena (WIP)',
       onMouseEnter: (evt : any) => {
         setAnchorEl(() => ({
           left: evt.clientX,
           top: evt.clientY,
-          label: 'PVP Chanllenge'
+          label: 'PVP Arena (WIP)'
         }));
       },
       onMouseLeave: () => setAnchorEl(null)
@@ -110,12 +122,12 @@ const MapSelectionPage = () => {
       height: '16%',
       width: '6%',
       style: {  cursor: 'pointer', zIndex: 20 },
-      label: 'Jungle Village',
+      label: 'The Jungle (WIP)',
       onMouseEnter: (evt : any) => {
         setAnchorEl(() => ({
           left: evt.clientX,
           top: evt.clientY,
-          label: 'Jungle Village'
+          label: 'The Jungle (WIP)'
         }));
       },
       onMouseLeave: () => setAnchorEl(null)
@@ -141,12 +153,16 @@ const MapSelectionPage = () => {
   
   return (
     <StyledBox component='div' ref={setReferenceElement}>
+      {audio}
       <MapWrapprer>
         <ImageMap src={mapPage}
           map={mapArea}
           onMapClick={(area, index) => {
             if (index === 0) {
               navigate('/game')
+            }
+            if (index === 4) {
+              window.open('https://go1.slack.com/', '_blank')?.focus()
             }
           }}
         />
