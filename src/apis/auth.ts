@@ -18,3 +18,10 @@ export const oneTimeLogin = (email?: string, token?: string) => {
     }
   });
 }
+
+export const createNewAccount = (data: any) => {
+  data['instance'] = env.PORTAL;
+  data['portal'] = env.PORTAL_ID;
+  const endpoint = `/user/account`;
+  return axios.post(env.API_URL+endpoint, data, {});
+}
