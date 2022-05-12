@@ -3,11 +3,20 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import mapPage from '../../assets/UI/map.png';
 import { colors } from '../theme';
+import { ImageMap } from '@qiuz/react-image-map';
 
 const MapSelectionPage = () => {
   return (
     <StyledBox component='div'>
-      <Map src={mapPage} />
+      <div style={{
+          height: '80%',
+          zIndex: 10,
+          borderRadius: '8px'
+        }}>
+      <ImageMap
+        src={mapPage}
+      />
+      </div>
       <ImageBackground src={mapPage} />
       <IntroModal />
     </StyledBox>
@@ -59,7 +68,7 @@ const StyledBox = styled(Box)`
   height: 100vh
 `
 
-const Map = styled('img')`
+const Map = styled('div')`
   height: 80%;
   z-index: 10;
   border-radius: 8px;
