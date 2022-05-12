@@ -1,5 +1,5 @@
 import { Box, Button, Modal, Stack, styled, Typography, Popover } from '@mui/material'
-import { useEffect, useState } from 'react';
+import { DetailedHTMLProps, LegacyRef, useEffect, useState } from 'react';
 import mapPage from '../../assets/UI/map.png';
 import { colors } from '../theme';
 import { ImageMap } from '@qiuz/react-image-map';
@@ -191,7 +191,7 @@ const MapSelectionPage = () => {
           {anchorEl.label}
         </Box>
       </Popover>}
-      <div ref={setPopperElement} style={{...styles.popper, zIndex:15}} {...attributes.popper}>
+      <div ref={setPopperElement as LegacyRef<any>} style={{...styles.popper, zIndex:15}} {...attributes.popper}>
         <div style={{width: 200, height: 280, paddingTop: 20, backgroundImage: `url(${panelBackgroundImage})`,backgroundSize: '100% 100%' }}>
           <div style={{ margin: 'auto', width: 180, height: 100, paddingTop: 10, backgroundImage: `url(${avatarBackground})`,backgroundSize: '100% 100%'}}>
             <div style={{ margin: 'auto', width: 48, height: 48, backgroundImage: `url(${avatarBox})`,backgroundSize: '100% 100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
