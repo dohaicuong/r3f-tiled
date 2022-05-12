@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { TileMap } from '../common/TileMap'
 import mapData from './map.json'
@@ -11,13 +11,7 @@ import { authAtom } from '../atoms/auth'
 import { QuestLineProvider, useQuestlineStateMachine } from './questline'
 import tileset from '../../assets/tileset.png'
 import { Html } from '@react-three/drei'
-
-const characterMap = {
-  1: 'swashbuckler',
-  2: 'fox',
-  3: 'sorcerer',
-  4: 'beastmaster',
-}
+import CharacterStats from './CharacterStats'
 
 const Game = () => {
   const [start, setStart] = useState(false)
@@ -48,11 +42,6 @@ export default Game
 const GameObjects = () => {
   const auth = useAtomValue(authAtom)
   const playerName = useMemo(() => `${auth.data.first_name} ${auth.data.last_name}`, [auth.data.first_name, auth.data.last_name])
-
-  // const character = useMemo(() => {
-  //   return (characterMap as any)[auth.data.data.cinque.avatar]
-  // }, [auth.data.data.cinque.avatar])
-
   const [questlineState] = useQuestlineStateMachine()
 
   return (
@@ -66,6 +55,8 @@ const GameObjects = () => {
       {questlineState.value === 'ongoing_quest' && (
         <Anvil atom_id='anvil' position={[8, 2, 0]} />
       )}
+      <CharacterStats />
     </>
   )
 }
+

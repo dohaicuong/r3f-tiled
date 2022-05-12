@@ -2,7 +2,7 @@ import { Paper, styled } from '@mui/material'
 import { Html } from '@react-three/drei'
 import { useEffect } from 'react'
 import { useAudio } from 'react-use'
-import backgroundSound from '../../assets/a_rainy_forest_morning.mp3'
+import backgroundSound from '../../assets/estavius.mp3'
 import { ControllerTutorialDialog } from './ControllerTutorialDialog'
 
 type MenuProps = {
@@ -17,7 +17,7 @@ const Menu: React.FC<MenuProps> = ({ isStart, onClose }) => {
 
   const handleStart = async () => {
     onClose()
-    controls.volume(0.2)
+    controls.volume(0.1)
     controls.play()
   }
 

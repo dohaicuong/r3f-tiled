@@ -159,16 +159,6 @@ const Sorc: React.FC<SorcProps> = ({
           <TakeQuestDialog onAccept={handleAccept} />
         </Html>
       )}
-
-      {/* {isInteractWithAvil && (
-        <Html>
-          <Paper>
-            <Typography variant='body1'>
-              Something that u need to read
-            </Typography>
-          </Paper>
-        </Html>
-      )} */}
     </>
   )
 }
