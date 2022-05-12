@@ -9,7 +9,8 @@ import Anvil from './Anvil'
 import { useAtomValue } from 'jotai'
 import { authAtom } from '../atoms/auth'
 import { QuestLineProvider, useQuestlineStateMachine } from './questline'
-import '../../assets/tileset.png'
+import tileset from '../../assets/tileset.png'
+import { Html } from '@react-three/drei'
 
 const characterMap = {
   1: 'swashbuckler',
@@ -35,6 +36,9 @@ const Game = () => {
       <QuestLineProvider>
         {start && <GameObjects />}
       </QuestLineProvider>
+      <Html style={{ display: 'none' }}>
+        <img src={tileset} />
+      </Html>
     </Suspense>
   )
 }
