@@ -1,9 +1,22 @@
 import { Canvas } from '@react-three/fiber'
-import { Provider as StateProvider } from 'jotai'
+import { Provider as StateProvider, useAtom } from 'jotai'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { authAtom } from '../atoms/auth';
 
 import Game from '../Game'
 
 const GamePage = () => {
+
+  const navigate = useNavigate();
+  const [auth, useAuth] = useAtom(authAtom);
+
+  useEffect(() => {
+    if (!auth.data.jwt) {
+      navigate('/');
+    }
+  }, [auth]);
+
   return (
     <Canvas
       camera={{
