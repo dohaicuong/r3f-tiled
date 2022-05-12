@@ -1,4 +1,3 @@
-import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
 type AuthAtom = {
@@ -6,11 +5,17 @@ type AuthAtom = {
   data: {
     id: string
     jwt: string
-    data: string
     uuid: string
     first_name: string
     last_name: string
-    mail: string
+    mail: string,
+    data: {
+      consent: any,
+      cinque: {
+        avatar: number
+        role: string
+      }
+    }
   }
 }
 
@@ -19,10 +24,16 @@ export const authAtom = atomWithStorage<AuthAtom>('cinque_auth', {
   data: {
     id: '',
     jwt: '',
-    data: '',
     uuid: '',
     first_name: '',
     last_name: '',
     mail: '',
+    data: {
+      consent: {},
+      cinque: {
+        avatar: 0,
+        role: ''
+      }
+    },
   }
 })
