@@ -3,7 +3,6 @@ import { useState } from 'react';
 import mapPage from '../../assets/UI/map.png';
 import { colors } from '../theme';
 import { ImageMap } from '@qiuz/react-image-map';
-import { areArraysEqual } from '@mui/base';
 import { useNavigate } from 'react-router-dom';
 
 const MapSelectionPage = () => {
