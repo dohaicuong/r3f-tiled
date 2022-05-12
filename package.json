@@ -12,6 +12,7 @@
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.7.0",
+    "@qiuz/react-image-map": "^1.1.8",
     "@react-three/drei": "^9.7.1",
     "@react-three/fiber": "^8.0.13",
     "array-unflat": "^1.0.1",
