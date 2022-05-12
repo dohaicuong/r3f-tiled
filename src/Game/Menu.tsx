@@ -4,8 +4,8 @@ import { useAtom, useSetAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { useAudio } from 'react-use'
 import backgroundSound from '../../assets/a_rainy_forest_morning.mp3'
-import { Auth } from '../apis/auth'
-import { userInfoFamily } from '../families/collidable'
+// import { Auth } from '../apis/auth'
+// import { authAtom } from '../atoms/auth'
 
 const Menu = () => {
   const [start, setStart] = useState(false)
@@ -13,9 +13,9 @@ const Menu = () => {
     src: backgroundSound,
     loop: true,
   })
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [info, setUserInfo] = useAtom(userInfoFamily({ id: 'player' }));
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  // const [info, setUserInfo] = useAtom(authAtom)
 
   const handleStart = async () => {
     // const response = await Auth(email, password);

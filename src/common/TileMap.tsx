@@ -1,7 +1,7 @@
 import unflat from 'array-unflat'
 import { useSetAtom } from 'jotai'
 import { useEffect, useRef } from 'react'
-import { collidableFamily } from '../families/collidable'
+import { collidableFamily } from '../atoms/collidable'
 import { Tile } from './Tile'
 
 type TileMapProps = {

@@ -1,11 +1,13 @@
+import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 import { useAudio } from 'react-use'
 import atkSound from '../../assets/sword.mp3'
+import { authAtom } from '../atoms/auth'
 import { PlayerAction } from '../common/usePlayerInput'
 
 export const useWhenPlayerAttack = (action: PlayerAction) => {
   const [attackAudio, , attackAudioControls] = useAudio({ src: atkSound, loop: false })
-  // const [userInfo, setUserInfo] = useAtom(userInfoFamily({ id: 'player' }))
+  // const [userInfo, setUserInfo] = useAtom(authAtom)
 
   useEffect(() => {
     if (action === 'attack') {

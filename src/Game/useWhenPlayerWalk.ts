@@ -4,7 +4,7 @@ import { useHitBox } from '../common/useHitBox'
 import { useMapHitBox } from '../common/useMapHitBox'
 import { PlayerAction } from '../common/usePlayerInput'
 import { useAtom } from 'jotai'
-import { collidableFamily } from '../families/collidable'
+import { collidableFamily } from '../atoms/collidable'
 
 export const useWhenPlayerWalk = (
   id: string,

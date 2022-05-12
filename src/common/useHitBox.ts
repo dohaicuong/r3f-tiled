@@ -1,7 +1,7 @@
 import { useAtomValue } from "jotai"
 import { useMemo } from "react"
 import { Box2, Vector2 } from "three"
-import { collidableFamily } from "../families/collidable"
+import { collidableFamily } from "../atoms/collidable"
 
 export const useHitBox = (id: string, padding: [number, number] = [0, 0]) => {
   const collidable = useAtomValue(collidableFamily({ id }))

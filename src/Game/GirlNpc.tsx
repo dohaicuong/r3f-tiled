@@ -5,7 +5,7 @@ import { useSetAtom } from 'jotai'
 import { useEffect, useRef } from 'react'
 import { Sprite } from 'three'
 import { AnimatedSprite } from '../common/AnimatedSprite'
-import { collidableFamily } from '../families/collidable'
+import { collidableFamily } from '../atoms/collidable'
 
 type GirlProps = SpriteProps & {
   atom_id: string

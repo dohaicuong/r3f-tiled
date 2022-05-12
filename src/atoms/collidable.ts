@@ -27,11 +27,3 @@ export const collidableFamily = atomFamily(
   }: Collidable) => atom({ x, y, width, height }),
   (a, b) => a.id === b.id
 )
-
-export const userInfoFamily = atomFamily(
-  ({
-    data = {},
-    oneTimeToken = '',
-  }: userInfo) => atom({ data, oneTimeToken }),
-  (a, b) => a.id === b.id
-)
