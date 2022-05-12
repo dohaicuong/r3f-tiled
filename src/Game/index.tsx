@@ -9,6 +9,7 @@ import Anvil from './Anvil'
 import { useAtomValue } from 'jotai'
 import { authAtom } from '../atoms/auth'
 import { QuestLineProvider, useQuestlineStateMachine } from './questline'
+import '../../assets/tileset.png'
 
 const characterMap = {
   1: 'swashbuckler',
