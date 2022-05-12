@@ -18,7 +18,7 @@ export const Tile: React.FC<TileProps> = ({
   tileHeight,
   ...props
 }) => {
-  const texture = useTexture(`assets/${source}`)
+  const texture = useTexture(source)
   const map = useMemo(() => texture.clone(), [])
 
   useEffect(() => {

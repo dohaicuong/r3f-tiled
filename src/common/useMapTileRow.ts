@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Direction } from './usePlayerInput'
+import { PlayerDirection } from './usePlayerInput'
 
 export type AnimationSchema = {
   attack_up: number
@@ -26,7 +26,7 @@ export type AnimationSchema = {
 export const useMapTileRow = (
   schema: AnimationSchema,
   action: string,
-  direction: Direction,
+  direction: PlayerDirection,
   defaultRow: number = 0
 ) => {
   // @ts-ignore

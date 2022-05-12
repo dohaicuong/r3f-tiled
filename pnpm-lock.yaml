@@ -8,6 +8,7 @@ specifiers:
   '@qiuz/react-image-map': ^1.1.8
   '@react-three/drei': ^9.7.1
   '@react-three/fiber': ^8.0.13
+  '@types/node': ^17.0.32
   '@types/react': ^18.0.0
   '@types/react-dom': ^18.0.0
   '@types/three': ^0.140.0
@@ -45,6 +46,7 @@ dependencies:
   xstate: 4.32.0
 
 devDependencies:
+  '@types/node': 17.0.32
   '@types/react': 18.0.9
   '@types/react-dom': 18.0.3
   '@types/three': 0.140.0
@@ -827,6 +829,10 @@ packages:
     dependencies:
       nanoid: 3.3.4
     dev: false
+
+  /@types/node/17.0.32:
+    resolution: {integrity: sha512-eAIcfAvhf/BkHcf4pkLJ7ECpBAhh9kcxRBpip9cTiO+hf+aJrsxYxBeS6OXvOd9WqNAJmavXVpZvY1rBjNsXmw==}
+    dev: true
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}

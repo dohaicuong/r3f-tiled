@@ -1,4 +1,4 @@
-import { memo, Suspense, useEffect, useMemo, useState } from 'react'
+import { Suspense, useMemo, useState } from 'react'
 
 import { TileMap } from '../common/TileMap'
 import mapData from './map.json'
@@ -9,6 +9,8 @@ import Anvil from './Anvil'
 import { useAtomValue } from 'jotai'
 import { authAtom } from '../atoms/auth'
 import { QuestLineProvider, useQuestlineStateMachine } from './questline'
+import tileset from '../../assets/tileset.png'
+import { Html } from '@react-three/drei'
 
 const characterMap = {
   1: 'swashbuckler',
@@ -28,12 +30,15 @@ const Game = () => {
       />
       <TileMap
         padding={[-14, -11]}
-        tileset='tileset.png'
+        tileset={tileset}
         data={mapData}
       />
       <QuestLineProvider>
         {start && <GameObjects />}
       </QuestLineProvider>
+      <Html style={{ display: 'none' }}>
+        <img src={tileset} />
+      </Html>
     </>
   )
 }
