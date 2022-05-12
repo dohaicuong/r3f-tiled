@@ -21,6 +21,7 @@ import victorySound from '../../assets/zomg_ictory.mp3'
 
 import { PORTAL_ID } from '../apis/constants'
 import { useAudio } from 'react-use'
+import { useNavigate } from 'react-router-dom'
 
 type SorcProps = SpriteProps & {
   atom_id: string
@@ -77,6 +78,13 @@ const Sorc: React.FC<SorcProps> = ({
 
   const [attackAudio] = useWhenPlayerAttack(action)
 
+  const [isInteractWithTeleCircle] = useWhenPlayerInteract(atom_id, 'teleport', action)
+  useEffect(() => {
+    if (isInteractWithTeleCircle) {
+      location.href = '/select-map'
+    }
+  }, [isInteractWithTeleCircle])
+  
   const [isInteractWithGirl] = useWhenPlayerInteract(atom_id, 'girl', action)
   const [questlineState, send] = useQuestlineStateMachine()
   const handleAccept = () => {
