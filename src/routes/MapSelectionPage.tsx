@@ -8,15 +8,9 @@ import { ImageMap } from '@qiuz/react-image-map';
 const MapSelectionPage = () => {
   return (
     <StyledBox component='div'>
-      <div style={{
-          height: '80%',
-          zIndex: 10,
-          borderRadius: '8px'
-        }}>
-      <ImageMap
-        src={mapPage}
-      />
-      </div>
+      <MapWrapprer>
+        <ImageMap src={mapPage} />
+      </MapWrapprer>
       <ImageBackground src={mapPage} />
       <IntroModal />
     </StyledBox>
@@ -55,6 +49,16 @@ const IntroModal = () => {
 
 export default MapSelectionPage
 
+const MapWrapprer = styled('div')`
+  & .image-map__content__img {
+    position: relative;
+    z-index: 10;
+    width: auto !important;
+    height: 80vh;
+    border-radius: 8px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px, rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px;
+  }
+`
 
 
 const P = styled('p')`
@@ -66,13 +70,6 @@ const StyledBox = styled(Box)`
   align-items: center;
   justify-content: center;
   height: 100vh
-`
-
-const Map = styled('div')`
-  height: 80%;
-  z-index: 10;
-  border-radius: 8px;
-  box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px, rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px;
 `
 
 const ImageBackground = styled('img')`
