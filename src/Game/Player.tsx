@@ -17,8 +17,10 @@ import { authAtom } from '../atoms/auth'
 import { oneTimeLogin } from '../apis/auth'
 import { createOnePlayerUrl, openPopUp } from '../common/openPopUp'
 import sorcTileset from '../../assets/sorc.png'
+import victorySound from '../../assets/zomg_ictory.mp3'
 
 import { PORTAL_ID } from '../apis/constants'
+import { useAudio } from 'react-use'
 
 type SorcProps = SpriteProps & {
   atom_id: string
@@ -66,6 +68,7 @@ const Sorc: React.FC<SorcProps> = ({
   ...props
 }) => {
   
+
   const [action, direction, acceleration] = usePlayerInput(inputSchema)
   const animationRow = useMapTileRow(animationSchema, action, direction, 11)
 
@@ -82,6 +85,7 @@ const Sorc: React.FC<SorcProps> = ({
 
   const [isInteractWithAvil] = useWhenPlayerInteract(atom_id, 'anvil', action)
   const [auth, setAuth] = useAtom(authAtom)
+  const [victoryAudio, , victoryAudioControls] = useAudio({ src: victorySound, loop: false })
   useEffect(() => {
     if (!isInteractWithAvil) return
     const questLoId = '12867398'
@@ -114,6 +118,8 @@ const Sorc: React.FC<SorcProps> = ({
           const completed = Boolean(res.hits.find(({ lo_id, status }: any) => lo_id === 12867398 && status === 'completed'))
           console.log({ completed })
           if (completed) {
+            victoryAudioControls.seek(0)
+            victoryAudioControls.play()
             send('NEXT')
           }
         })
@@ -146,6 +152,7 @@ const Sorc: React.FC<SorcProps> = ({
       </AnimatedSprite>
 
       <Html>{attackAudio}</Html>
+      <Html>{victoryAudio}</Html>
 
       {isInteractWithGirl && questlineState.value === 'new_quest' && (
         <Html>
