@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import { lazy, Suspense } from 'react'
 import { ThemeProvider } from '@mui/material'
 import { createRoot } from 'react-dom/client'
 import { theme } from './theme'
@@ -15,11 +15,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path='/' element={<CharacterCreationPage />} />
-          <Route path='/select-map' element={<MapSelectionPage />} />
-          <Route path='/game' element={<GamePage />} />
-        </Routes>
+        <Suspense fallback='Loading page...'>
+          <Routes>
+            <Route path='/' element={<CharacterCreationPage />} />
+            <Route path='/select-map' element={<MapSelectionPage />} />
+            <Route path='/game' element={<GamePage />} />
+          </Routes>
+        </Suspense>
       </ThemeProvider>
     </BrowserRouter>
   )

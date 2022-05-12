@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react'
 import { Sprite } from 'three'
 import { AnimatedSprite } from '../common/AnimatedSprite'
 import { collidableFamily } from '../atoms/collidable'
+import girlTileset from '../../assets/npc_girl.png'
 
 type GirlProps = SpriteProps & {
   atom_id: string
@@ -33,7 +34,7 @@ const Girl: React.FC<GirlProps> = ({ atom_id, hasQuest, ...props }) => {
       }}
       currentTextureRow={3}
       textureAtlas={{
-        tileset: 'npc_girl.png',
+        tileset: girlTileset,
         tileSize: [16, 24],
         columns: 4,
       }}

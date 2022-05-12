@@ -12,10 +12,11 @@ import { useWhenPlayerWalk } from './useWhenPlayerWalk'
 import { useWhenPlayerAttack } from './useWhenPlayerAttack'
 import { useWhenPlayerInteract } from '../common/useWhenPlayerInteract'
 import { useQuestlineStateMachine } from './questline'
-import { useAtom, useAtomValue } from 'jotai'
+import { useAtom } from 'jotai'
 import { authAtom } from '../atoms/auth'
 import { oneTimeLogin } from '../apis/auth'
 import { createOnePlayerUrl, openPopUp } from '../common/openPopUp'
+import sorcTileset from '../../assets/sorc.png'
 
 import { PORTAL_ID } from '../apis/constants'
 
@@ -132,7 +133,7 @@ const Sorc: React.FC<SorcProps> = ({
         }}
         currentTextureRow={animationRow}
         textureAtlas={{
-          tileset: 'sorc.png',
+          tileset: sorcTileset,
           tileSize: [48, 48],
           columns: 4,
         }}

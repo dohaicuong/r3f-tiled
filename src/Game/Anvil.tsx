@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react'
 import { Sprite } from 'three'
 import { AnimatedSprite } from '../common/AnimatedSprite'
 import { collidableFamily } from '../atoms/collidable'
+import anvilTileset from '../../assets/anvil.png'
 
 type AnvilProps = SpriteProps & {
   atom_id: string
@@ -32,7 +33,7 @@ const Anvil: React.FC<AnvilProps> = ({ atom_id, ...props }) => {
       }}
       currentTextureRow={0}
       textureAtlas={{
-        tileset: 'anvil.png',
+        tileset: anvilTileset,
         tileSize: [16, 16],
         columns: 1,
       }}

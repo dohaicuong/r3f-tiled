@@ -102,7 +102,7 @@ const MapSelectionPage = () => {
         <ImageMap src={mapPage}
           map={mapArea}
           onMapClick={(area, index) => {
-            if (index == 0) {
+            if (index === 0) {
               navigate('/game')
             }
           }}
