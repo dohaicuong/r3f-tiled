@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { SpriteProps } from '@react-three/fiber'
 import { Sprite } from 'three'
 import { Html } from '@react-three/drei'
-import { Paper, Typography } from '@mui/material'
+import { Paper, styled, Typography } from '@mui/material'
 
 import { AnimatedSprite } from '../common/AnimatedSprite'
 import { PlayerInputSchema, usePlayerInput } from '../common/usePlayerInput'
@@ -86,18 +86,10 @@ const Sorc: React.FC<SorcProps> = ({
           columns: 4,
         }}
       >
-        <Html position={[-0.4, 1, 0]}>
-          <Typography
-            style={{
-              zIndex: 1,
-              color: '#000',
-              fontWeight: 900,
-              fontSize: 18,
-              textShadow: '0px 1px 4px #fff',
-            }}
-          >
+        <Html position={[-0.8, 1, 0]}>
+          <PlayerName>
             {name}
-          </Typography>
+          </PlayerName>
         </Html>
       </AnimatedSprite>
 
@@ -127,3 +119,12 @@ const Sorc: React.FC<SorcProps> = ({
 }
 
 export default Sorc
+
+const PlayerName = styled(Typography)`
+  z-index: 1;
+  color: #000;
+  font-weight: 900;
+  text-shadow: 0px 1px 4px #fff;
+  white-space: nowrap;
+  position: relative;
+`
