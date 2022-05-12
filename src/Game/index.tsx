@@ -23,7 +23,7 @@ const Game = () => {
   const [start, setStart] = useState(false)
 
   return (
-    <Suspense fallback={null}>
+    <>
       <Menu
         isStart={start}
         onClose={() => setStart(true)}
@@ -39,7 +39,7 @@ const Game = () => {
       <Html style={{ display: 'none' }}>
         <img src={tileset} />
       </Html>
-    </Suspense>
+    </>
   )
 }
 
