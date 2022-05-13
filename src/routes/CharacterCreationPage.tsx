@@ -1,4 +1,4 @@
-import { Box, Select, Grid, Hidden, Stack, Typography, Link, TextField, MenuItem, InputLabel, FormControl, Avatar, Button } from '@mui/material'
+import { Box, Select, Grid, Hidden, Stack, Typography, Link, TextField, MenuItem, InputLabel, FormControl, Avatar, Button, Alert } from '@mui/material'
 import backgroundImage from '../../assets/UI/half_map.png';
 import Go1Logo from '../../assets/UI/go1_logo.svg';
 import avatar1 from '../../assets/UI/avatars/avatar1.png'
@@ -11,6 +11,7 @@ import { createNewAccount, oneTimeLogin } from '../apis/auth';
 import { useAtom } from 'jotai';
 import { authAtom } from '../atoms/auth';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 const roles = [
   'Deleloper',
@@ -33,6 +34,7 @@ const CharacterCreationPage = () => {
   const [role, setRole] = useState('');
   const [avatar, setAvatar] = useState({ value: 0, url: '' });
   const [auth, setAuth] = useAtom(authAtom);
+  const [alert, setAlert] = useState(null);
   const navigate = useNavigate();
 
   const clearInput = () => {
@@ -70,15 +72,21 @@ const CharacterCreationPage = () => {
         }
       }
     };
-    const response = await createNewAccount(payload);
-    const {id, jwt, data, uuid, first_name, last_name, mail} = response.data;
-    // const res = await oneTimeLogin(mail, jwt);
-    // const { one_time_token }  = res.data;
-    setAuth({
-      ...auth,
-      // oneTimeToken: one_time_token,
-      data: { id, jwt, data, uuid, first_name, last_name, mail }
-    });
+    try {
+      const response = await createNewAccount(payload);
+      const {id, jwt, data, uuid, first_name, last_name, mail} = response.data;
+      // const res = await oneTimeLogin(mail, jwt);
+      // const { one_time_token }  = res.data;
+      setAuth({
+        ...auth,
+        // oneTimeToken: one_time_token,
+        data: { id, jwt, data, uuid, first_name, last_name, mail }
+      });
+    } catch(err) {
+      if (err instanceof AxiosError && err.response?.data?.message) {
+        setAlert(err.response.data.message);
+      }
+    }
   }
 
   return (
@@ -108,6 +116,7 @@ const CharacterCreationPage = () => {
                 Already have an account? <Link href="#">Log in</Link>
               </Typography>
               <Stack direction="column" paddingTop={3} paddingX={2} spacing={1}>
+                {alert && <Stack><Alert severity="error">{alert}</Alert></Stack>}
                 <Stack direction="row"  spacing={1}>
                   <TextField onChange={evt => setFirstName(evt.target.value as string)} required id="first-name" label="First Name" />
                   <TextField onChange={evt => setLastName(evt.target.value as string)} required id="last-name" label="Last Name" />

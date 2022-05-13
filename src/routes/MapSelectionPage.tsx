@@ -16,6 +16,7 @@ import { useAtom } from 'jotai';
 import { authAtom } from '../atoms/auth';
 import backgroundSound from '../../assets/a_rainy_forest_morning.mp3'
 import { useAudio } from 'react-use';
+import { initialAtom } from '../atoms/intial';
 
 const MapSelectionPage = () => {
   const [anchorEl, setAnchorEl] = useState<any>(null);
@@ -25,7 +26,7 @@ const MapSelectionPage = () => {
     src: backgroundSound,
     loop: true,
   })
-
+  
   useEffect(() => {
     controls.volume(0.2)
     controls.play()
@@ -51,7 +52,7 @@ const MapSelectionPage = () => {
     ],
     placement: 'left-end',
   });
-  const [auth, useAuth] = useAtom(authAtom);
+  const [auth, setAuth] = useAtom(authAtom);
 
   useEffect(() => {
     if (!auth.data.jwt) {
@@ -208,6 +209,9 @@ const MapSelectionPage = () => {
             <div style={{ margin: 'auto', width: 160, height: 40, marginTop: 5, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
               <Typography>Completed {score/250*100}%</Typography>
             </div>
+            <div style={{ margin: 'auto', width: 160, height: 40, marginTop: 5, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+              <Typography>Go token {score}</Typography>
+            </div>
             <div style={{ margin: 'auto', width: 160, height: 40, marginTop: 15, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Button color="secondary" variant="contained" onClick={() => navigate('/game')}>
                 Continue
@@ -224,6 +228,12 @@ const MapSelectionPage = () => {
 
 const IntroModal = () => {
   const [open, setOpen] = useState(true);
+  const [initial, setInitial] = useAtom(initialAtom);
+
+  if (initial.initial) {
+    return null;
+  }
+
   return (
     <Modal open={open}>
       <Box component="div" sx={modalBoxstyle}>
@@ -243,7 +253,7 @@ const IntroModal = () => {
             <P>We have put together some content based on your profile, you can earn tokens for completing 
               this too! You can also take challenges and see where you stack up in our leaderboard!</P>
           </Typography>
-          <Button color="secondary" variant="contained" onClick={() => setOpen(false)}>
+          <Button color="secondary" variant="contained" onClick={() => {setOpen(false); setInitial({initial: true})}}>
             Let's go
           </Button>
         </Stack>
