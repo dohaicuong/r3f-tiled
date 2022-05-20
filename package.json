@@ -24,7 +24,7 @@
     "react-dom": "^18.0.0",
     "react-popper": "^2.3.0",
     "react-router-dom": "6",
-    "react-use": "^17.3.2",
+    "react-use": "17.4.0",
     "three": "^0.140.0",
     "xstate": "^4.32.0"
   },
