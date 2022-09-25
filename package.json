@@ -15,7 +15,7 @@
     "@popperjs/core": "^2.11.5",
     "@qiuz/react-image-map": "^1.1.8",
     "@react-three/drei": "^9.7.1",
-    "@react-three/fiber": "^8.0.13",
+    "@react-three/fiber": "8.8.3",
     "@xstate/react": "^3.0.0",
     "array-unflat": "^1.0.1",
     "axios": "^0.27.2",
