@@ -16,7 +16,7 @@
     "@qiuz/react-image-map": "^1.1.8",
     "@react-three/drei": "^9.7.1",
     "@react-three/fiber": "^8.0.13",
-    "@xstate/react": "^3.0.0",
+    "@xstate/react": "^4.0.0",
     "array-unflat": "^1.0.1",
     "axios": "^0.27.2",
     "jotai": "^1.6.6",
@@ -26,7 +26,7 @@
     "react-router-dom": "6",
     "react-use": "^17.3.2",
     "three": "^0.140.0",
-    "xstate": "^4.32.0"
+    "xstate": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.32",

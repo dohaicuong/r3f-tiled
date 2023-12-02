@@ -14,7 +14,7 @@ specifiers:
   '@types/react-dom': ^18.0.0
   '@types/three': ^0.140.0
   '@vitejs/plugin-react': ^1.3.0
-  '@xstate/react': ^3.0.0
+  '@xstate/react': ^4.0.0
   array-unflat: ^1.0.1
   axios: ^0.27.2
   jotai: ^1.6.6
@@ -26,7 +26,7 @@ specifiers:
   three: ^0.140.0
   typescript: ^4.6.3
   vite: ^2.9.7
-  xstate: ^4.32.0
+  xstate: ^5.0.0
 
 dependencies:
   '@emotion/react': 11.9.0_7cpxmzzodpxnolj5zcc5cr63ji
@@ -37,17 +37,17 @@ dependencies:
   '@qiuz/react-image-map': 1.1.8
   '@react-three/drei': 9.7.1_rxo7jyp47cwqmjb25uolaazeku
   '@react-three/fiber': 8.0.13_jiynjc5hsdbdio2yxwde32kpbi
-  '@xstate/react': 3.0.0_zakvn5kedq46jiagsplandpnaa
+  '@xstate/react': 4.0.0_v6kvp5wtukcu6yetdcstdqrrzu
   array-unflat: 1.0.1
   axios: 0.27.2
-  jotai: 1.6.6_react@18.1.0+xstate@4.32.0
+  jotai: 1.6.6_react@18.1.0+xstate@5.0.0
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-popper: 2.3.0_42yiot2n2wjamynwfzzmd7tk3i
   react-router-dom: 6.3.0_ef5jwxihqo6n7gxfmzogljlgcm
   react-use: 17.3.2_ef5jwxihqo6n7gxfmzogljlgcm
   three: 0.140.0
-  xstate: 4.32.0
+  xstate: 5.0.0
 
 devDependencies:
   '@types/node': 17.0.32
@@ -920,22 +920,19 @@ packages:
     resolution: {integrity: sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==}
     dev: false
 
-  /@xstate/react/3.0.0_zakvn5kedq46jiagsplandpnaa:
-    resolution: {integrity: sha512-KHSCfwtb8gZ7QH2luihvmKYI+0lcdHQOmGNRUxUEs4zVgaJCyd8csCEmwPsudpliLdUmyxX2pzUBojFkINpotw==}
+  /@xstate/react/4.0.0_v6kvp5wtukcu6yetdcstdqrrzu:
+    resolution: {integrity: sha512-+vINFFBX5JWed/xD2/kNZ0SYbWyeSHgwsJkdLBeHp+Rnbf7QSLWxs3zAXcWPBdPuAgF/suo4E0GaiGZzaxumMQ==}
     peerDependencies:
-      '@xstate/fsm': ^2.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      xstate: ^4.31.0
+      xstate: ^5.0.0
     peerDependenciesMeta:
-      '@xstate/fsm':
-        optional: true
       xstate:
         optional: true
     dependencies:
       react: 18.1.0
       use-isomorphic-layout-effect: 1.1.2_7cpxmzzodpxnolj5zcc5cr63ji
       use-sync-external-store: 1.1.0_react@18.1.0
-      xstate: 4.32.0
+      xstate: 5.0.0
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -1475,7 +1472,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /jotai/1.6.6_react@18.1.0+xstate@4.32.0:
+  /jotai/1.6.6_react@18.1.0+xstate@5.0.0:
     resolution: {integrity: sha512-rzUyxHFImnDDjUmC0i0BXyppq1M6ZxrHjhp0SK3VQXvXYAu5Hz9wPJ6w207s2Mlv7jpfiIf26w9m82FLCP3eqw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -1510,7 +1507,7 @@ packages:
         optional: true
     dependencies:
       react: 18.1.0
-      xstate: 4.32.0
+      xstate: 5.0.0
     dev: false
 
   /js-cookie/2.2.1:
@@ -2177,8 +2174,8 @@ packages:
     resolution: {integrity: sha512-9Z0JcMTFxeE+b2x1LJTdnaT8rT8aEp7MVxkNwoycNmJWwPdzoXzMh0BjJSh/AEFP+KPYZUli814h8bJZFIZ2jA==}
     dev: false
 
-  /xstate/4.32.0:
-    resolution: {integrity: sha512-62gETqwnw4pBRe+tVWMt8hLgWEU8lq2qO8VN5PWmTELceRVt3I1bu1cwdraVRHUn4Bb2lnhNzn1A73oShuC+8g==}
+  /xstate/5.0.0:
+    resolution: {integrity: sha512-FIKtRv8eQB+3dRLdnzdxlQ/sRjcqiN31JaskeHbcyRBaEvcwcjbakYZ5PVV9v4K0szbe793SUN/04J6/g5GrEA==}
     dev: false
 
   /yaml/1.10.2:
