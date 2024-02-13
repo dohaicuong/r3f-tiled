@@ -18,7 +18,7 @@
     "@react-three/fiber": "^8.0.13",
     "@xstate/react": "^3.0.0",
     "array-unflat": "^1.0.1",
-    "axios": "^0.27.2",
+    "axios": "^0.28.0",
     "jotai": "^1.6.6",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
