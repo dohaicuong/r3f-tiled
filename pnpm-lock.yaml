@@ -33,7 +33,7 @@ dependencies:
   '@emotion/styled': 11.8.1_ycz2ostpb5cpb2s3izz5qyhrbm
   '@mui/icons-material': 5.6.2_gs4txqvbg6wy3z27cqyhc6rvwe
   '@mui/material': 5.7.0_4xriuibr7qayay6mzcpq5f43me
-  '@popperjs/core': 2.11.5
+  '@popperjs/core': 2.11.8
   '@qiuz/react-image-map': 1.1.8
   '@react-three/drei': 9.7.1_rxo7jyp47cwqmjb25uolaazeku
   '@react-three/fiber': 8.0.13_jiynjc5hsdbdio2yxwde32kpbi
@@ -43,7 +43,7 @@ dependencies:
   jotai: 1.6.6_react@18.1.0+xstate@4.32.0
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
-  react-popper: 2.3.0_42yiot2n2wjamynwfzzmd7tk3i
+  react-popper: 2.3.0_ortgsh4szhreav6rrkrcrhdai4
   react-router-dom: 6.3.0_ef5jwxihqo6n7gxfmzogljlgcm
   react-use: 17.3.2_ef5jwxihqo6n7gxfmzogljlgcm
   three: 0.140.0
@@ -516,7 +516,7 @@ packages:
       '@mui/private-classnames': 5.7.0
       '@mui/types': 7.1.3_@types+react@18.0.9
       '@mui/utils': 5.7.0_react@18.1.0
-      '@popperjs/core': 2.11.5
+      '@popperjs/core': 2.11.8
       '@types/react': 18.0.9
       clsx: 1.1.1
       prop-types: 15.8.1
@@ -677,8 +677,8 @@ packages:
       react-is: 17.0.2
     dev: false
 
-  /@popperjs/core/2.11.5:
-    resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
+  /@popperjs/core/2.11.8:
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
   /@qiuz/react-image-map/1.1.8:
@@ -1396,8 +1396,8 @@ packages:
       mime-types: 2.1.35
     dev: false
 
-  /fsevents/2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+  /fsevents/2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -1738,14 +1738,14 @@ packages:
     resolution: {integrity: sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==}
     dev: false
 
-  /react-popper/2.3.0_42yiot2n2wjamynwfzzmd7tk3i:
+  /react-popper/2.3.0_ortgsh4szhreav6rrkrcrhdai4:
     resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
     peerDependencies:
       '@popperjs/core': ^2.0.0
       react: ^16.8.0 || ^17 || ^18
       react-dom: ^16.8.0 || ^17 || ^18
     dependencies:
-      '@popperjs/core': 2.11.5
+      '@popperjs/core': 2.11.8
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
       react-fast-compare: 3.2.0
@@ -1899,7 +1899,7 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /rtl-css-js/1.15.0:
@@ -2160,7 +2160,7 @@ packages:
       resolve: 1.22.0
       rollup: 2.72.1
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /warning/4.0.3:
