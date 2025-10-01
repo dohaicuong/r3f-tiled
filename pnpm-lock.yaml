@@ -24,7 +24,7 @@ specifiers:
   react-router-dom: '6'
   react-use: ^17.3.2
   three: ^0.140.0
-  typescript: ^4.6.3
+  typescript: ^5.0.0
   vite: ^2.9.7
   xstate: ^4.32.0
 
@@ -55,7 +55,7 @@ devDependencies:
   '@types/react-dom': 18.0.3
   '@types/three': 0.140.0
   '@vitejs/plugin-react': 1.3.2
-  typescript: 4.6.4
+  typescript: 5.9.3
   vite: 2.9.8
 
 packages:
@@ -2107,9 +2107,9 @@ packages:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: false
 
-  /typescript/4.6.4:
-    resolution: {integrity: sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==}
-    engines: {node: '>=4.2.0'}
+  /typescript/5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
     hasBin: true
     dev: true
 
